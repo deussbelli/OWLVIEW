@@ -1,0 +1,280 @@
+.balanceContainer {
+	max-width: 1200px;
+	margin: 2rem auto;
+	padding: 2rem;
+	position: relative;
+	overflow: hidden;
+	animation: fadeIn 0.5s ease-out;
+}
+
+.balanceContainer::before {
+	content: '';
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: radial-gradient(circle at 30% 30%, rgba(255, 181, 46, 0.1) 0%, transparent 25%), radial-gradient(circle at 70% 70%, rgba(233, 138, 21, 0.1) 0%, transparent 25%);
+	animation: rotateBackground 30s linear infinite;
+	z-index: -1;
+}
+
+@keyframes rotateBackground {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+
+}
+
+.balanceContainer h1 {
+	text-align: center;
+	margin-bottom: 2rem;
+	font-size: 2.5rem;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+	0% {
+		text-shadow: 0 0 10px rgba(255, 181, 46, 0.3);
+	}
+
+	100% {
+		text-shadow: 0 0 20px rgba(233, 138, 21, 0.5);
+	}
+
+}
+
+.tabsContainer {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 2rem;
+	flex-wrap: wrap;
+	justify-content: center;
+	position: relative;
+}
+
+.tabButton {
+	padding: 1rem 1.5rem;
+	border: none;
+	border-radius: var(--border-radius-md);
+	background: rgba(255, 255, 255, 0.1);
+	color: var(--text-secondary);
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+	backdrop-filter: blur(5px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	box-shadow: var(--shadow-sm);
+}
+
+.tabButton:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--shadow-md);
+	color: var(--text-primary);
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.tabButton::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 181, 46, 0.2), transparent);
+	transition: all 0.5s ease;
+}
+
+.tabButton:hover::before {
+	left: 100%;
+}
+
+.tabButton.activeTab {
+	background: linear-gradient(135deg, rgba(255, 181, 46, 0.2), rgba(233, 138, 21, 0.2));
+	color: var(--text-primary);
+	border: 1px solid rgba(255, 181, 46, 0.3);
+	font-weight: var(--font-weight-bold);
+}
+
+.tabButton.activeTab::after {
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 50%;
+	height: 3px;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	border-radius: 3px;
+	animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.5;
+	}
+
+	100% {
+		opacity: 1;
+	}
+
+}
+
+.tabContent {
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border-radius: var(--border-radius-lg);
+	padding: 2rem;
+	box-shadow: var(--shadow-md);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	animation: fadeInUp 0.5s ease-out;
+}
+
+.submitButton {
+	padding: 1rem 2rem;
+	border: none;
+	border-radius: var(--border-radius-md);
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: var(--owl-dark);
+	font-weight: var(--font-weight-bold);
+	font-size: 1rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	margin-top: 1rem;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 4px 15px rgba(233, 138, 21, 0.3);
+}
+
+.submitButton:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 25px rgba(233, 138, 21, 0.4);
+}
+
+.submitButton:disabled {
+	background: var(--owl-medium);
+	color: var(--text-secondary);
+	cursor: not-allowed;
+	transform: none;
+	box-shadow: none;
+}
+
+.submitButton::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+	transition: all 0.5s ease;
+}
+
+.submitButton:hover::after {
+	left: 100%;
+}
+
+.formGroup {
+	margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--text-primary);
+	font-weight: var(--font-weight-medium);
+}
+
+.formGroup input, .formGroup select {
+	width: 100%;
+	padding: 0.8rem 1rem;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: var(--border-radius-md);
+	background: rgba(255, 255, 255, 0.1);
+	color: var(--text-primary);
+	font-size: 1rem;
+	transition: all 0.3s ease;
+}
+
+.formGroup input:focus, .formGroup select:focus {
+	outline: none;
+	border-color: var(--owl-accent);
+	box-shadow: 0 0 0 3px rgba(255, 181, 46, 0.2);
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+@media (max-width:768px) {
+	.balanceContainer {
+		padding: 1rem;
+	}
+
+	.balanceContainer h1 {
+		font-size: 2rem;
+	}
+
+	.tabsContainer {
+		gap: 0.5rem;
+	}
+
+	.tabButton {
+		padding: 0.8rem 1rem;
+		font-size: 0.9rem;
+	}
+
+	.tabContent {
+		padding: 1.5rem;
+	}
+
+}
+
+@media (max-width:480px) {
+	.balanceContainer h1 {
+		font-size: 1.8rem;
+	}
+
+	.tabsContainer {
+		flex-direction: column;
+	}
+
+	.tabButton {
+		width: 100%;
+	}
+
+}

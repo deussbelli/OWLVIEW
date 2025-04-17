@@ -1,0 +1,348 @@
+.newsContainer {
+	max-width: 1200px;
+	margin: 2rem auto;
+	padding: 0 2rem;
+	animation: fadeIn 0.8s ease-out;
+	margin-top: 100px;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+.newsContainer h2 {
+	font-size: 2.5rem;
+	margin-bottom: 2rem;
+	text-align: center;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	position: relative;
+}
+
+.newsContainer h2::after {
+	content: "";
+	display: block;
+	width: 100px;
+	height: 4px;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	margin: 1rem auto 0;
+	border-radius: 2px;
+	animation: scaleIn 0.8s ease-out;
+}
+
+@keyframes scaleIn {
+	from {
+		transform: scaleX(0);
+	}
+
+	to {
+		transform: scaleX(1);
+	}
+
+}
+
+.error, .loading, .noNews {
+	text-align: center;
+	padding: 1rem;
+	border-radius: var(--border-radius-md);
+	margin: 1rem 0;
+	animation: fadeIn 0.5s ease-out;
+}
+
+.error {
+	background-color: rgba(255, 107, 107, 0.1);
+	color: #ff6b6b;
+	border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.loading {
+	background-color: rgba(79, 93, 117, 0.1);
+	color: var(--owl-medium);
+}
+
+.noNews {
+	background-color: rgba(79, 93, 117, 0.1);
+	color: var(--owl-medium);
+	font-style: italic;
+}
+
+.adminControls {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+	margin-bottom: 2rem;
+	animation: fadeInDown 0.8s ease-out;
+}
+
+.fetchButton, .addButton {
+	padding: 0.8rem 1.5rem;
+	border: none;
+	border-radius: var(--border-radius-md);
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	transition: all var(--transition-speed) ease;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.fetchButton {
+	background: rgba(79, 93, 117, 0.2);
+	color: var(--text-primary);
+	border: 1px solid var(--owl-medium);
+}
+
+.fetchButton:hover {
+	background: rgba(79, 93, 117, 0.4);
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-sm);
+}
+
+.addButton {
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: var(--owl-dark);
+	font-weight: var(--font-weight-bold);
+}
+
+.addButton:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(233, 138, 21, 0.4);
+}
+
+.addNewsForm {
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border-radius: var(--border-radius-lg);
+	padding: 2rem;
+	margin-bottom: 2rem;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+		max-height: 0;
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+		max-height: 500px;
+	}
+
+}
+
+.addNewsForm h3 {
+	margin-bottom: 1.5rem;
+	color: var(--owl-accent);
+}
+
+.addNewsForm label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--text-primary);
+}
+
+.addNewsForm input, .addNewsForm textarea {
+	width: 100%;
+	padding: 0.8rem;
+	margin-bottom: 1rem;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-md);
+	background: rgba(255, 255, 255, 0.1);
+	color: var(--text-primary);
+	transition: all var(--transition-speed) ease;
+}
+
+.addNewsForm input:focus, .addNewsForm textarea:focus {
+	outline: none;
+	border-color: var(--owl-accent);
+	box-shadow: 0 0 0 3px rgba(245, 161, 34, 0.2);
+}
+
+.addNewsForm textarea {
+	min-height: 150px;
+	resize: vertical;
+}
+
+.addNewsForm button {
+	width: 100%;
+	padding: 1rem;
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: var(--owl-dark);
+	border: none;
+	border-radius: var(--border-radius-md);
+	font-weight: var(--font-weight-bold);
+	cursor: pointer;
+	transition: all var(--transition-speed) ease;
+}
+
+.addNewsForm button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(233, 138, 21, 0.4);
+}
+
+.addNewsForm button:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+	transform: none !important;
+	box-shadow: none !important;
+}
+
+.newsList {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.5rem;
+	animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+.newsItem {
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border-radius: var(--border-radius-lg);
+	padding: 1.5rem;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	transition: all var(--transition-speed) ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.newsItem:hover {
+	transform: translateY(-5px);
+	box-shadow: var(--shadow-md);
+	border-color: rgba(245, 161, 34, 0.3);
+}
+
+.newsItem::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 4px;
+	height: 100%;
+	background: linear-gradient(to bottom, var(--owl-accent), var(--owl-secondary));
+	transition: all var(--transition-speed) ease;
+}
+
+.newsItem:hover::before {
+	width: 6px;
+}
+
+.newsTitle {
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+	color: var(--text-primary);
+	position: relative;
+}
+
+.newsContent {
+	margin-bottom: 1.5rem;
+	color: var(--text-secondary);
+	line-height: 1.7;
+}
+
+.newsInfo {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	font-size: 0.9rem;
+	color: var(--owl-medium);
+}
+
+.newsDate {
+	color: var(--owl-accent);
+}
+
+.newsDivider {
+	opacity: 0.5;
+}
+
+.newsSource {
+	color: var(--text-secondary);
+}
+
+.newsSource a {
+	color: var(--owl-accent);
+	text-decoration: none;
+	transition: all var(--transition-speed) ease;
+}
+
+.newsSource a:hover {
+	text-decoration: underline;
+}
+
+.deleteButton {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: rgba(255, 107, 107, 0.1);
+	color: #ff6b6b;
+	border: 1px solid rgba(255, 107, 107, 0.3);
+	border-radius: var(--border-radius-md);
+	padding: 0.3rem 0.6rem;
+	font-size: 0.8rem;
+	cursor: pointer;
+	transition: all var(--transition-speed) ease;
+}
+
+.deleteButton:hover {
+	background: rgba(255, 107, 107, 0.2);
+	transform: translateY(-2px);
+}
+
+@media (max-width:768px) {
+	.newsContainer {
+		padding: 0 1rem;
+	}
+
+	.adminControls {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.fetchButton, .addButton {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.addNewsForm {
+		padding: 1.5rem;
+	}
+
+	.newsItem {
+		padding: 1.2rem;
+	}
+
+}
+
+@media (max-width:480px) {
+	.newsContainer h2 {
+		font-size: 2rem;
+	}
+
+	.newsTitle {
+		font-size: 1.3rem;
+	}
+
+	.newsInfo {
+		font-size: 0.8rem;
+	}
+
+}

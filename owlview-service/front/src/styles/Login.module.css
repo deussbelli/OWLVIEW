@@ -1,0 +1,321 @@
+.animatedBackground {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	background: radial-gradient(circle at 20% 30%, rgba(255, 181, 46, 0.1) 0%, transparent 20%), radial-gradient(circle at 80% 70%, rgba(233, 138, 21, 0.1) 0%, transparent 20%), linear-gradient(45deg, rgba(47, 53, 66, 0.05) 0%, transparent 100%);
+	animation: rotateBackground 60s linear infinite;
+}
+
+@keyframes rotateBackground {
+	0% {
+		transform: rotate(0deg) scale(1);
+	}
+
+	50% {
+		transform: rotate(180deg) scale(1.1);
+	}
+
+	100% {
+		transform: rotate(360deg) scale(1);
+	}
+
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 2rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.container::before {
+	content: '';
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: radial-gradient(circle at 30% 30%, rgba(255, 181, 46, 0.1) 0%, transparent 25%), radial-gradient(circle at 70% 70%, rgba(233, 138, 21, 0.1) 0%, transparent 25%);
+	animation: rotateBackground 30s linear infinite;
+	z-index: -1;
+}
+
+@keyframes rotateBackground {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+
+}
+
+h1 {
+	font-size: 2.5rem;
+	margin-bottom: 2rem;
+	color: var(--text-secondary);
+	text-align: center;
+	position: relative;
+	background: linear-gradient(90deg, var(--owl-accent), #15076e, var(--owl-secondary));
+	background-size: 200% auto;
+	color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	animation: textShine 3s linear infinite;
+}
+
+h1::after {
+	content: '';
+	display: block;
+	width: 80px;
+	height: 4px;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	margin: 1rem auto 0;
+	border-radius: 2px;
+}
+
+form {
+	width: 100%;
+	max-width: 500px;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border-radius: var(--border-radius-lg);
+	padding: 2rem;
+	box-shadow: var(--shadow-lg);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	animation: fadeInUp 0.8s ease-out;
+}
+
+.formGroup {
+	margin-bottom: 1.5rem;
+	position: relative;
+}
+
+label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--text-primary);
+	font-weight: var(--font-weight-medium);
+}
+
+input {
+	width: 100%;
+	padding: 0.8rem 1rem;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-md);
+	background-color: rgba(255, 255, 255, 0.1);
+	color: var(--text-primary);
+	font-size: var(--font-size-md);
+	transition: all var(--transition-speed) ease;
+}
+
+input:focus {
+	outline: none;
+	border-color: var(--owl-accent);
+	box-shadow: 0 0 0 3px rgba(245, 161, 34, 0.2);
+}
+
+.error {
+	color: #ff6b6b;
+	font-size: var(--font-size-sm);
+	margin-top: 0.5rem;
+	animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+	0%, 100% {
+		transform: translateX(0);
+	}
+
+	20%, 60% {
+		transform: translateX(-5px);
+	}
+
+	40%, 80% {
+		transform: translateX(5px);
+	}
+
+}
+
+.button {
+	width: 100%;
+	padding: 1rem;
+	border: none;
+	border-radius: var(--border-radius-md);
+	justify-content: center;
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: var(--owl-dark);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-md);
+	cursor: pointer;
+	transition: all var(--transition-speed) ease;
+	margin-top: 1rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(233, 138, 21, 0.4);
+}
+
+.button:disabled {
+	background: var(--owl-medium);
+	color: #FFB52E;
+	justify-content: center;
+	cursor: not-allowed;
+	transform: none;
+	box-shadow: none;
+}
+
+.button::after {
+	content: '';
+	position: absolute;
+	justify-content: center;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	transition: all 0.5s ease;
+}
+
+.button:hover::after {
+	left: 100%;
+}
+
+.googleButton {
+	margin-top: 1.5rem;
+	display: flex;
+	justify-content: center;
+	animation: fadeIn 1s ease-out;
+}
+
+.registerLink {
+	margin-top: 1.5rem;
+	text-align: center;
+	color: var(--text-secondary);
+	animation: fadeIn 1s ease-out;
+}
+
+.registerLink a {
+	color: var(--owl-accent);
+	font-weight: var(--font-weight-medium);
+	text-decoration: none;
+	position: relative;
+}
+
+.registerLink a::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background: var(--owl-accent);
+	transition: width 0.3s ease;
+}
+
+.registerLink a:hover::after {
+	width: 100%;
+}
+
+.container a {
+	color: var(--text-secondary);
+	margin-top: 1.5rem;
+	text-align: center;
+	position: relative;
+	transition: all 0.3s ease;
+	animation: fadeIn 0.8s ease-out 0.5s both;
+}
+
+.container a:hover {
+	color: var(--owl-accent);
+	text-decoration: none;
+}
+
+.container a::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background: var(--owl-accent);
+	transition: width 0.3s ease;
+}
+
+.container a:hover::after {
+	width: 100%;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+@media (max-width:768px) {
+	.container {
+		padding: 1rem;
+	}
+
+	h1 {
+		font-size: 2rem;
+	}
+
+	form {
+		padding: 1.5rem;
+	}
+
+}
+
+@media (max-width:480px) {
+	h1 {
+		font-size: 1.8rem;
+	}
+
+	.button {
+		padding: 0.9rem;
+	}
+
+}

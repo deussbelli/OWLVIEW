@@ -1,0 +1,166 @@
+
+        <html>
+        <head>
+          <meta charset="utf-8"/>
+          <title>Дашборди опитування 5e11b7cf-262d-4adb-a7b0-d95e444ed2dc</title>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <style>
+            body {
+              font-family: sans-serif;
+              margin: 20px;
+            }
+            .chart-container {
+              width: 600px;
+              height: 400px;
+              margin-bottom: 30px;
+            }
+            .question-block {
+              border: 1px solid;
+              padding: 15px;
+              margin-bottom: 30px;
+            }
+            table.answer-stats {
+              border-collapse: collapse;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+            table.answer-stats th,
+            table.answer-stats td {
+              border: 1px solid;
+              padding: 5px 10px;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Дашборди опитування 5e11b7cf-262d-4adb-a7b0-d95e444ed2dc</h1>
+          <p>
+            <b>Запрошені:</b> 2 |
+            <b>Пройдено:</b> 0 |
+            <b>Відкладено:</b> 0 |
+            <b>У процесі:</b> 2 |
+            <b>Середній час (хв):</b> 0.0
+          </p>
+
+          <div class="chart-container">
+            <canvas id="overallChart"></canvas>
+          </div>
+
+          <div id="questionsBlock"></div>
+
+          <script>
+            const analyticsData = {"invited_count": 2, "completed_count": 0, "postponed_count": 0, "in_progress_count": 2, "average_time_minutes": 0.0, "question_analytics": []};
+
+            window.addEventListener("DOMContentLoaded", () => {
+                const c1 = document.getElementById("overallChart").getContext("2d");
+                new Chart(c1, {
+                  type: 'bar',
+                  data: {
+                    labels: ['Запрошені','Пройдено','Відкладено','У процесі'],
+                    datasets: [{
+                      label: 'Респонденти',
+                      data: [
+                        analyticsData.invited_count,
+                        analyticsData.completed_count,
+                        analyticsData.postponed_count,
+                        analyticsData.in_progress_count
+                      ]
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    scales: {
+                      y: { beginAtZero: true }
+                    }
+                  }
+                });
+
+                const questionsBlock = document.getElementById("questionsBlock");
+
+                analyticsData.question_analytics.forEach((q, idx) => {
+                    const qDiv = document.createElement("div");
+                    qDiv.className = "question-block";
+                    qDiv.innerHTML = `
+                      <h2>Питання</h2>
+                      <p><b>ID:</b> ${q.questionId}, <b>Тип:</b> ${q.questionType}</p>
+                    `;
+
+                    if (Array.isArray(q.allRawAnswers) && q.allRawAnswers.length > 0) {
+                        let rawHtml = "<h4>Сирі відповіді (читабельні):</h4><ul>";
+                        q.allRawAnswers.forEach(r => {
+                            rawHtml += `<li>${r}</li>`;
+                        });
+                        rawHtml += "</ul>";
+                        qDiv.innerHTML += rawHtml;
+                    }
+
+                    if (Array.isArray(q.typedValues) && q.typedValues.length > 0) {
+                        let tvHtml = "<h4>Введені значення:</h4><ul>";
+                        q.typedValues.forEach(tv => {
+                            tvHtml += `<li>${tv}</li>`;
+                        });
+                        tvHtml += "</ul>";
+                        qDiv.innerHTML += tvHtml;
+                    }
+
+                    if (q.answersDetail && q.answersDetail.length > 0) {
+                        let tableHtml = `
+                          <table class="answer-stats">
+                            <thead>
+                              <tr><th>Відповідь</th><th>Кількість</th><th>%</th></tr>
+                            </thead>
+                            <tbody>
+                        `;
+                        q.answersDetail.forEach(a => {
+                            tableHtml += `
+                              <tr>
+                                <td>${a.answerValue}</td>
+                                <td>${a.count}</td>
+                                <td>${a.percent}</td>
+                              </tr>
+                            `;
+                        });
+                        tableHtml += "</tbody></table>";
+                        qDiv.innerHTML += tableHtml;
+                    }
+
+                    if (q.chartType === null) {
+                        const p = document.createElement("p");
+                        p.textContent = "Для цього питання діаграма не потрібна";
+                        qDiv.appendChild(p);
+                    } else {
+                        const cDiv = document.createElement("div");
+                        cDiv.className = "chart-container";
+                        const canvasId = `qchart_${idx}`;
+                        cDiv.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+                        qDiv.appendChild(cDiv);
+
+                        setTimeout(() => {
+                            const ctx = document.getElementById(canvasId).getContext("2d");
+                            const labels = q.answersDetail.map(d => d.answerValue);
+                            const dataVals = q.answersDetail.map(d => d.count);
+                            new Chart(ctx, {
+                                type: q.chartType,
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        label: 'Відповіді',
+                                        data: dataVals
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    scales: (q.chartType === 'pie') ? {} : {
+                                        y: { beginAtZero: true }
+                                    }
+                                }
+                            });
+                        }, 0);
+                    }
+
+                    questionsBlock.appendChild(qDiv);
+                });
+            });
+          </script>
+        </body>
+        </html>
+        

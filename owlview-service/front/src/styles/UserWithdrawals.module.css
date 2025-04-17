@@ -1,0 +1,272 @@
+.container {
+	max-width: 1200px;
+	margin: 2rem auto;
+	padding: 2rem;
+	position: relative;
+	animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+.container h1 {
+	font-size: 2.2rem;
+	margin-bottom: 2rem;
+	text-align: center;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	position: relative;
+	padding-bottom: 1rem;
+}
+
+.container h1::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100px;
+	height: 4px;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	border-radius: 2px;
+}
+
+.table {
+	width: 100%;
+  overflow-x: auto;
+	border-collapse: collapse;
+	margin-top: 1.5rem;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border-radius: var(--border-radius-lg);
+	overflow: hidden;
+	box-shadow: var(--shadow-md);
+	animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+.table th, .table td {
+	padding: 1rem;
+	text-align: left;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table th {
+	background: rgba(245, 161, 34, 0.1);
+	color: var(--owl-accent);
+	font-weight: var(--font-weight-bold);
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	letter-spacing: 0.5px;
+}
+
+.table tr:last-child td {
+	border-bottom: none;
+}
+
+.table tr {
+	transition: all 0.3s ease;
+}
+
+.table tr:hover {
+	background: rgba(245, 161, 34, 0.05);
+}
+
+.table tr:hover td {
+	color: var(--owl-accent);
+}
+
+.approveButton, .rejectButton {
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: var(--border-radius-sm);
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	margin-right: 0.5rem;
+	font-size: 0.85rem;
+}
+
+.approveButton {
+	background: rgba(46, 213, 115, 0.2);
+	color: #2ed573;
+}
+
+.approveButton:hover {
+	background: rgba(46, 213, 115, 0.3);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 10px rgba(46, 213, 115, 0.2);
+}
+
+.rejectButton {
+	background: rgba(255, 71, 87, 0.2);
+	color: #ff4757;
+}
+
+.rejectButton:hover {
+	background: rgba(255, 71, 87, 0.3);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 10px rgba(255, 71, 87, 0.2);
+}
+
+.approvedStatus, .rejectedStatus {
+	padding: 0.5rem 1rem;
+	border-radius: var(--border-radius-sm);
+	font-weight: var(--font-weight-medium);
+	font-size: 0.85rem;
+	display: inline-block;
+}
+
+.approvedStatus {
+	background: rgba(46, 213, 115, 0.2);
+	color: #2ed573;
+	animation: pulseGreen 2s infinite;
+}
+
+.rejectedStatus {
+	background: rgba(255, 71, 87, 0.2);
+	color: #ff4757;
+}
+
+@keyframes pulseGreen {
+	0% {
+		box-shadow: 0 0 0 0 rgba(46, 213, 115, 0.4);
+	}
+
+	70% {
+		box-shadow: 0 0 0 10px rgba(46, 213, 115, 0);
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 rgba(46, 213, 115, 0);
+	}
+
+}
+
+.error {
+	color: #ff6b6b;
+	text-align: center;
+	margin-top: 2rem;
+	padding: 1rem;
+	background: rgba(255, 107, 107, 0.1);
+	border-radius: var(--border-radius-md);
+	border-left: 4px solid #ff6b6b;
+	animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+	0%, 100% {
+		transform: translateX(0);
+	}
+
+	20%, 60% {
+		transform: translateX(-5px);
+	}
+
+	40%, 80% {
+		transform: translateX(5px);
+	}
+
+}
+
+@media (max-width:1024px) {
+	.container {
+		padding: 1.5rem;
+	}
+
+	.table {
+		font-size: 0.9rem;
+	}
+
+}
+
+@media (max-width:768px) {
+	.table {
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+		animation: none;
+	}
+
+	.table th, .table td {
+		padding: 0.8rem;
+	}
+
+	.approveButton, .rejectButton {
+		padding: 0.4rem 0.8rem;
+		font-size: 0.8rem;
+	}
+
+}
+
+@media (max-width:480px) {
+	.container {
+		padding: 1rem;
+	}
+
+	.container h1 {
+		font-size: 1.8rem;
+	}
+
+	.table th, .table td {
+		padding: 0.6rem;
+		font-size: 0.8rem;
+	}
+
+	.approvedStatus, .rejectedStatus {
+		padding: 0.3rem 0.6rem;
+		font-size: 0.75rem;
+	}
+
+}
+
+.container p {
+	text-align: center;
+	color: var(--text-secondary);
+	padding: 2rem;
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: var(--border-radius-lg);
+	animation: fadeIn 0.8s ease-out;
+}
+
+.loading {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 3px solid rgba(245, 161, 34, 0.3);
+	border-radius: 50%;
+	border-top-color: var(--owl-accent);
+	animation: spin 1s ease-in-out infinite;
+	margin-right: 10px;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+
+}

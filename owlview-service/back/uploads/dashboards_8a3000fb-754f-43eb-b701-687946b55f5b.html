@@ -1,0 +1,158 @@
+
+        <html>
+        <head>
+          <meta charset="utf-8"/>
+          <title>Дашборды опроса 8a3000fb-754f-43eb-b701-687946b55f5b</title>
+          <!-- Chart.js CDN -->
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <style>
+            body {
+              font-family: sans-serif; 
+              margin: 20px; 
+            }
+            .chart-container {
+              width: 600px; 
+              height: 400px; 
+              margin-bottom: 40px; 
+              display: inline-block; 
+              vertical-align: top;
+            }
+            .question-block {
+              border: 1px solid #ccc; 
+              padding: 15px; 
+              margin-bottom: 30px;
+            }
+            h2 {
+              margin-top: 0;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Дашборды опроса 8a3000fb-754f-43eb-b701-687946b55f5b</h1>
+          <p><b>Приглашены:</b> {analytics.invited_count} |
+             <b>Пройдено:</b> {analytics.completed_count} |
+             <b>Отложено:</b> {analytics.postponed_count} |
+             <b>В процессе:</b> {analytics.in_progress_count} |
+             <b>Среднее время (мин):</b> {analytics.average_time_minutes}
+          </p>
+
+          <!-- Canvas для общей статистики (bar) -->
+          <div class="chart-container">
+            <canvas id="overallChart"></canvas>
+          </div>
+
+          <!-- Блоки для всех вопросов -->
+          <div id="questionsBlock"></div>
+
+          <script>
+            const analyticsData = {"invited_count": 2, "completed_count": 2, "postponed_count": 0, "in_progress_count": 0, "average_time_minutes": 0.62, "question_analytics": [{"questionId": "q_1742814823705", "questionType": "q101", "title": "1", "answersDetail": [{"answerValue": "ans1742814831832", "count": 1, "percent": 50.0}, {"answerValue": "ans1742814834866", "count": 1, "percent": 50.0}]}, {"questionId": "q_1742814852374", "questionType": "q102", "title": "2", "answersDetail": [{"answerValue": "ans1742814862862", "count": 2, "percent": 100.0}]}, {"questionId": "q_1742814882016", "questionType": "q306", "title": "sd", "answersDetail": []}, {"questionId": "q_1742814893786", "questionType": "q506", "title": "sd", "answersDetail": []}, {"questionId": "q_1742814917498", "questionType": "q404", "title": "sd", "answersDetail": []}]};
+
+            window.addEventListener("DOMContentLoaded", function() {
+                // 1) Общая статистика: столбчатая диаграмма
+                const c1 = document.getElementById("overallChart").getContext("2d");
+                new Chart(c1, {
+                  type: 'bar',
+                  data: {
+                    labels: ['Приглашены','Пройдены','Отложено','В процессе'],
+                    datasets: [{
+                      label: 'Респонденты',
+                      data: [
+                        analyticsData.invited_count,
+                        analyticsData.completed_count,
+                        analyticsData.postponed_count,
+                        analyticsData.in_progress_count
+                      ],
+                      backgroundColor: 'rgba(75,192,192,0.4)',
+                      borderColor: 'rgba(75,192,192,1)',
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    scales: {
+                      y: { beginAtZero: true }
+                    }
+                  }
+                });
+
+                // 2) Генерируем диаграммы для КАЖДОГО вопроса
+                //    Сделаем 4 типа: bar, line(с fill для area), pie, radar
+                const chartConfigs = [
+                  { type: 'bar',   title: 'Столбчатая диаграмма',  opts: {} },
+                  { type: 'line',  title: 'Линейная/область',       opts: { fill: true, tension: 0.3 } },
+                  { type: 'pie',   title: 'Круговая диаграмма',     opts: {} },
+                  { type: 'radar', title: 'Радиальная диаграмма',   opts: {} }
+                ];
+
+                const questionsBlock = document.getElementById("questionsBlock");
+
+                analyticsData.question_analytics.forEach((q, qIndex) => {
+                    // Создадим отдельный блок для каждого вопроса
+                    const qDiv = document.createElement("div");
+                    qDiv.className = "question-block";
+                    qDiv.innerHTML = `
+                      <h2>Вопрос #${qIndex+1}: ${q.title}</h2>
+                      <p><b>ID:</b> ${q.questionId}, <b>Тип:</b> ${q.questionType}</p>
+                    `;
+                    
+                    // labels = answerValue, data = count
+                    const qlabels = q.answersDetail.map(a => a.answerValue);
+                    const qvalues = q.answersDetail.map(a => a.count);
+
+                    // Для наглядности рисуем 4 диаграммы
+                    chartConfigs.forEach((chartCfg, cfgIndex) => {
+                        // Создаём контейнер с canvas
+                        const container = document.createElement("div");
+                        container.className = "chart-container";
+                        const canvasId = `q_${qIndex}_chart_${cfgIndex}`;
+                        container.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+                        qDiv.appendChild(container);
+
+                        // После добавления в DOM – строим Chart
+                        setTimeout(() => {
+                          const ctx = document.getElementById(canvasId).getContext("2d");
+                          new Chart(ctx, {
+                            type: chartCfg.type,
+                            data: {
+                              labels: qlabels,
+                              datasets: [{
+                                label: chartCfg.title,
+                                data: qvalues,
+                                backgroundColor: [
+                                  'rgba(255,99,132,0.6)',
+                                  'rgba(54,162,235,0.6)',
+                                  'rgba(255,206,86,0.6)',
+                                  'rgba(75,192,192,0.6)',
+                                  'rgba(153,102,255,0.6)',
+                                  'rgba(255,159,64,0.6)'
+                                ],
+                                borderWidth: 1,
+                                // Для line-графика можно включить fill
+                                fill: chartCfg.opts.fill || false,
+                                tension: chartCfg.opts.tension || 0
+                              }]
+                            },
+                            options: {
+                              responsive: true,
+                              plugins: {
+                                title: {
+                                  display: true,
+                                  text: chartCfg.title
+                                }
+                              },
+                              scales: (chartCfg.type==='radar' || chartCfg.type==='pie') ? {}
+                                     : { y: { beginAtZero: true } },
+                            }
+                          });
+                        }, 0);
+                    });
+
+                    // Добавляем блок вопроса в общий контейнер
+                    questionsBlock.appendChild(qDiv);
+                });
+            });
+          </script>
+
+        </body>
+        </html>
+        

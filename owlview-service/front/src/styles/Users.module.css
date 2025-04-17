@@ -1,0 +1,430 @@
+.usersContainer {
+	padding: 2rem;
+	max-width: 1800px;
+	margin: 0 auto;
+	animation: fadeIn 0.5s ease-out;
+	margin-top: 60px;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+.usersContainer h1 {
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+	color: var(--text-primary);
+	text-align: center;
+	position: relative;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	background-size: 200% auto;
+	color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	animation: textShine 3s linear infinite;
+}
+
+.usersContainer h1::after {
+	content: '';
+	position: absolute;
+	bottom: -20px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100px;
+	height: 4px;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	border-radius: 2px;
+	animation: widthGrow 1s ease-out;
+}
+
+.usersContainer h1 {
+	position: relative;
+	margin-bottom: 40px;
+}
+
+@keyframes widthGrow {
+	from {
+		width: 0;
+	}
+
+	to {
+		width: 100px;
+	}
+
+}
+
+.filtersRow {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	margin-bottom: 2rem;
+	animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+.filtersContainer, .searchContainer {
+	flex: 1;
+	min-width: 300px;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border-radius: var(--border-radius-lg);
+	padding: 1.5rem;
+	box-shadow: var(--shadow-md);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	transition: all 0.3s ease;
+}
+
+.filtersContainer:hover, .searchContainer:hover {
+	box-shadow: var(--shadow-lg);
+	transform: translateY(-3px);
+}
+
+.filtersContainer h3, .searchContainer h3 {
+	color: var(--owl-accent);
+	margin-bottom: 1rem;
+	font-size: 1.3rem;
+}
+
+.filtersContainer > div {
+	margin-bottom: 1.2rem;
+	padding-bottom: 1.2rem;
+	border-bottom: 1px dashed var(--divider-color);
+	animation: fadeIn 0.5s ease-out;
+}
+
+.filtersContainer label {
+	display: inline-block;
+	margin-left: 0.5rem;
+	color: var(--text-secondary);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.filtersContainer label:hover {
+	color: var(--text-primary);
+}
+
+.filtersContainer input[type="checkbox"] {
+	cursor: pointer;
+	accent-color: var(--owl-accent);
+}
+
+.filtersContainer select, .filtersContainer input[type="number"], .filtersContainer input[type="date"], .searchContainer select, .searchContainer input[type="text"] {
+	width: 100%;
+	padding: 0.6rem 1rem;
+	margin-top: 0.5rem;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-md);
+	color: var(--text-primary);
+	transition: all 0.3s ease;
+}
+
+.filtersContainer select:focus, .filtersContainer input:focus, .searchContainer select:focus, .searchContainer input:focus {
+	outline: none;
+	border-color: var(--owl-accent);
+	box-shadow: 0 0 0 3px rgba(245, 161, 34, 0.2);
+}
+
+.searchContainer button {
+	width: 100%;
+	padding: 0.7rem;
+	margin-top: 1rem;
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: var(--owl-dark);
+	border: none;
+	border-radius: var(--border-radius-md);
+	font-weight: var(--font-weight-bold);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.searchContainer button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(233, 138, 21, 0.4);
+}
+
+.usersContainer > button {
+	display: block;
+	margin: 0 auto 2rem;
+	padding: 0.8rem 2rem;
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: var(--owl-dark);
+	border: none;
+	border-radius: var(--border-radius-md);
+	font-weight: var(--font-weight-bold);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	animation: pulse 2s infinite;
+}
+
+.usersContainer > button:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 20px rgba(233, 138, 21, 0.4);
+	animation: none;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.05);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+
+}
+
+.usersTable {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 1rem;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border-radius: var(--border-radius-lg);
+	overflow: hidden;
+	box-shadow: var(--shadow-md);
+	animation: fadeIn 0.8s ease-out;
+}
+
+.usersTable th, .usersTable td {
+	padding: 1rem;
+	text-align: left;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.usersTable th {
+	background: rgba(245, 161, 34, 0.1);
+	color: var(--owl-accent);
+	font-weight: var(--font-weight-bold);
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	letter-spacing: 1px;
+}
+
+.usersTable tr:last-child td {
+	border-bottom: none;
+}
+
+.usersTable tr:hover td {
+	background: rgba(245, 161, 34, 0.05);
+}
+
+.usersTable td {
+	transition: all 0.3s ease;
+}
+
+.usersTable button {
+	padding: 0.5rem 1rem;
+	margin: 0.2rem;
+	border: none;
+	border-radius: var(--border-radius-sm);
+	font-size: 0.8rem;
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.usersTable button:nth-child(1) {
+	background: rgba(75, 192, 192, 0.2);
+	color: #4bc0c0;
+}
+
+.usersTable button:nth-child(2) {
+	background: rgba(255, 99, 132, 0.2);
+	color: #ff6384;
+}
+
+.usersTable button:nth-child(3) {
+	background: rgba(54, 162, 235, 0.2);
+	color: #36a2eb;
+}
+
+.usersTable button:nth-child(4) {
+	background: rgba(255, 159, 64, 0.2);
+	color: #ff9f40;
+}
+
+.usersTable button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popupBackdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(5px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	animation: fadeIn 0.3s ease-out;
+}
+
+.popup {
+	background: var(--background-primary);
+	border-radius: var(--border-radius-lg);
+	padding: 2rem;
+	width: 90%;
+	max-width: 500px;
+	box-shadow: var(--shadow-lg);
+	border: 1px solid var(--owl-accent);
+	animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+	from {
+		transform: scale(0.9);
+		opacity: 0;
+	}
+
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+
+}
+
+.popup h2 {
+	color: var(--owl-accent);
+	margin-bottom: 1.5rem;
+	font-size: 1.5rem;
+}
+
+.popup label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--text-secondary);
+}
+
+.popup input[type="date"], .popup input[type="time"], .popup textarea {
+	width: 100%;
+	padding: 0.8rem;
+	margin-bottom: 1rem;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-md);
+	color: var(--text-primary);
+}
+
+.popup textarea {
+	min-height: 100px;
+	resize: vertical;
+}
+
+.popupButtons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 1rem;
+	margin-top: 1.5rem;
+}
+
+.popupButtons button {
+	padding: 0.7rem 1.5rem;
+	border: none;
+	border-radius: var(--border-radius-md);
+	font-weight: var(--font-weight-bold);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.popupButtons button:first-child {
+	background: rgba(255, 99, 132, 0.2);
+	color: #ff6384;
+}
+
+.popupButtons button:last-child {
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: var(--owl-dark);
+}
+
+.popupButtons button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width:1200px) {
+	.usersTable {
+		display: block;
+		overflow-x: auto;
+	}
+
+}
+
+@media (max-width:768px) {
+	.usersContainer {
+		padding: 1rem;
+	}
+
+	.usersContainer h1 {
+		font-size: 2rem;
+	}
+
+	.filtersContainer, .searchContainer {
+		min-width: 100%;
+	}
+
+	.popup {
+		width: 95%;
+		padding: 1.5rem;
+	}
+
+}
+
+@media (max-width:480px) {
+	.usersContainer h1 {
+		font-size: 1.8rem;
+	}
+
+	.usersTable th, .usersTable td {
+		padding: 0.8rem 0.5rem;
+		font-size: 0.9rem;
+	}
+
+	.usersTable button {
+		padding: 0.4rem 0.8rem;
+		font-size: 0.7rem;
+	}
+
+	.popup h2 {
+		font-size: 1.3rem;
+	}
+
+	.popupButtons {
+		flex-direction: column;
+	}
+
+	.popupButtons button {
+		width: 100%;
+	}
+
+}

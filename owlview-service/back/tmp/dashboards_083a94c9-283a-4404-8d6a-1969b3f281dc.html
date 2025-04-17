@@ -1,0 +1,462 @@
+
+        <!DOCTYPE html>
+        <html lang="uk">
+        <head>
+          <meta charset="utf-8"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Дашборди опитування 083a94c9-283a-4404-8d6a-1969b3f281dc</title>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <style>
+            :root {
+              --accent-primary: #FFB52E;
+              --owl-accent: #FFB52E;
+              --owl-secondary: #E98A15;
+              --container-padding: 1rem;
+              --font-size-lg: 1.125rem;
+              --font-size-md: 1rem;
+              --font-size-sm: 0.875rem;
+              --text-secondary: #666;
+              --text-primary: #000;
+              --border-radius-lg: 1rem;
+              --border-radius-md: 0.5rem;
+              --border-radius-xl: 2rem;
+              --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.1);
+              --shadow-lg: 0 6px 25px rgba(0, 0, 0, 0.15);
+              --shadow-xl: 0 8px 30px rgba(0, 0, 0, 0.2);
+              --background-primary: #fff;
+              --border-color: #eee;
+              --font-weight-bold: 700;
+            }
+            
+            * {
+              box-sizing: border-box;
+              margin: 0;
+              padding: 0;
+            }
+            
+            body {
+              font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+              background-color: #f9f9f9;
+              color: var(--text-primary);
+              line-height: 1.6;
+              padding: 2rem;
+            }
+            
+            .dashboard-container {
+              max-width: 1200px;
+              margin: 0 auto;
+              background-color: var(--background-primary);
+              border-radius: var(--border-radius-lg);
+              box-shadow: var(--shadow-lg);
+              padding: 2rem;
+            }
+            
+            h1 {
+              color: var(--text-primary);
+              font-size: 1.8rem;
+              margin-bottom: 1.5rem;
+              padding-bottom: 1rem;
+              border-bottom: 3px solid var(--accent-primary);
+              display: inline-block;
+            }
+            
+            h2 {
+              color: var(--text-primary);
+              font-size: 1.5rem;
+              margin-bottom: 1rem;
+              padding-left: 0.5rem;
+              border-left: 4px solid var(--owl-accent);
+            }
+            
+            h4 {
+              color: var(--text-secondary);
+              font-size: var(--font-size-md);
+              margin: 1rem 0 0.5rem;
+            }
+            
+            .stats-overview {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 1rem;
+              justify-content: space-between;
+              margin-bottom: 2rem;
+              padding: 1rem;
+              background-color: #f8f8f8;
+              border-radius: var(--border-radius-md);
+              box-shadow: var(--shadow-md);
+            }
+            
+            .stat-card {
+              flex: 1;
+              min-width: 150px;
+              padding: 1rem;
+              background-color: white;
+              border-radius: var(--border-radius-md);
+              box-shadow: var(--shadow-md);
+              text-align: center;
+              transition: transform 0.2s ease;
+            }
+            
+            .stat-card:hover {
+              transform: translateY(-5px);
+            }
+            
+            .stat-label {
+              font-size: var(--font-size-sm);
+              color: var(--text-secondary);
+              margin-bottom: 0.3rem;
+            }
+            
+            .stat-value {
+              font-size: var(--font-size-lg);
+              font-weight: var(--font-weight-bold);
+              color: var(--owl-secondary);
+            }
+            
+            .chart-container {
+              width: 100%;
+              height: 400px;
+              margin-bottom: 2.5rem;
+              padding: 1rem;
+              background: white;
+              border-radius: var(--border-radius-md);
+              box-shadow: var(--shadow-md);
+            }
+            
+            .question-block {
+              border: 1px solid var(--border-color);
+              border-radius: var(--border-radius-md);
+              padding: 1.5rem;
+              margin-bottom: 2rem;
+              box-shadow: var(--shadow-md);
+              transition: box-shadow 0.3s ease;
+              background-color: white;
+            }
+            
+            .question-block:hover {
+              box-shadow: var(--shadow-lg);
+            }
+            
+            .question-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 1rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 1px solid var(--border-color);
+            }
+            
+            .question-meta {
+              background-color: #f8f8f8;
+              padding: 0.5rem 1rem;
+              border-radius: var(--border-radius-md);
+              font-size: var(--font-size-sm);
+            }
+            
+            table.answer-stats {
+              width: 100%;
+              border-collapse: collapse;
+              margin: 1rem 0;
+              box-shadow: var(--shadow-md);
+              border-radius: var(--border-radius-md);
+              overflow: hidden;
+            }
+            
+            table.answer-stats th,
+            table.answer-stats td {
+              padding: 0.8rem 1rem;
+              text-align: left;
+              border: none;
+            }
+            
+            table.answer-stats th {
+              background-color: var(--owl-accent);
+              color: white;
+              font-weight: var(--font-weight-bold);
+            }
+            
+            table.answer-stats tr {
+              background-color: white;
+              border-bottom: 1px solid var(--border-color);
+            }
+            
+            table.answer-stats tr:last-child {
+              border-bottom: none;
+            }
+            
+            table.answer-stats tr:nth-child(even) {
+              background-color: #f8f8f8;
+            }
+            
+            table.answer-stats td:last-child,
+            table.answer-stats th:last-child {
+              text-align: center;
+            }
+            
+            ul {
+              list-style-position: inside;
+              margin: 1rem 0;
+              padding-left: 1rem;
+            }
+            
+            li {
+              margin-bottom: 0.5rem;
+              line-height: 1.5;
+            }
+            
+            @media (max-width: 768px) {
+              body {
+                padding: 1rem;
+              }
+              
+              .dashboard-container {
+                padding: 1rem;
+              }
+              
+              .stats-overview {
+                flex-direction: column;
+              }
+              
+              .chart-container {
+                height: 300px;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="dashboard-container">
+            <h1>Дашборди опитування 083a94c9-283a-4404-8d6a-1969b3f281dc</h1>
+            
+            <div class="stats-overview">
+              <div class="stat-card">
+                <div class="stat-label">Запрошені</div>
+                <div class="stat-value">2</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Пройдено</div>
+                <div class="stat-value">2</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Відкладено</div>
+                <div class="stat-value">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">У процесі</div>
+                <div class="stat-value">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Середній час (хв)</div>
+                <div class="stat-value">0.78</div>
+              </div>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="overallChart"></canvas>
+            </div>
+
+            <div id="questionsBlock"></div>
+          </div>
+
+          <script>
+            const analyticsData = {"invited_count": 2, "completed_count": 2, "postponed_count": 0, "in_progress_count": 0, "average_time_minutes": 0.78, "question_analytics": [{"questionId": "q_1744836749972", "questionType": "q101", "title": "sad", "chartType": "pie", "answersDetail": [{"answerValue": "sad", "count": 1, "percent": 50.0}, {"answerValue": "ds", "count": 1, "percent": 50.0}], "typedValues": [], "allRawAnswers": ["Обрано: sad |", "Обрано: ds |"], "averageValue": null}, {"questionId": "q_1744836750313", "questionType": "q102", "title": "adad", "chartType": "bar", "answersDetail": [{"answerValue": "ada", "count": 1, "percent": 50.0}, {"answerValue": "ad", "count": 1, "percent": 50.0}], "typedValues": [], "allRawAnswers": ["Обрано: ada |", "Обрано: ad |"], "averageValue": null}]};
+
+            window.addEventListener("DOMContentLoaded", () => {
+                const c1 = document.getElementById("overallChart").getContext("2d");
+                new Chart(c1, {
+                  type: 'bar',
+                  data: {
+                    labels: ['Запрошені','Пройдено','Відкладено','У процесі'],
+                    datasets: [{
+                      label: 'Респонденти',
+                      data: [
+                        analyticsData.invited_count,
+                        analyticsData.completed_count,
+                        analyticsData.postponed_count,
+                        analyticsData.in_progress_count
+                      ],
+                      backgroundColor: [
+                        '#FFB52E',
+                        '#E98A15',
+                        '#FFD700',
+                        '#FF9F45'
+                      ],
+                      borderColor: [
+                        '#E98A15',
+                        '#D17000',
+                        '#FFC000',
+                        '#FF8C00'
+                      ],
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                      y: { 
+                        beginAtZero: true,
+                        grid: {
+                          color: '#f0f0f0'
+                        }
+                      },
+                      x: {
+                        grid: {
+                          display: false
+                        }
+                      }
+                    },
+                    plugins: {
+                      legend: {
+                        display: false
+                      }
+                    }
+                  }
+                });
+
+                const questionsBlock = document.getElementById("questionsBlock");
+
+                analyticsData.question_analytics.forEach((q, idx) => {
+                    const qDiv = document.createElement("div");
+                    qDiv.className = "question-block";
+                    
+                    // Question header
+                    const headerDiv = document.createElement("div");
+                    headerDiv.className = "question-header";
+                    
+                    const titleH2 = document.createElement("h2");
+                    titleH2.textContent = "Питання";
+                    headerDiv.appendChild(titleH2);
+                    
+                    const metaDiv = document.createElement("div");
+                    metaDiv.className = "question-meta";
+                    metaDiv.innerHTML = `<b>ID:</b> ${q.questionId}, <b>Тип:</b> ${q.questionType}`;
+                    headerDiv.appendChild(metaDiv);
+                    
+                    qDiv.appendChild(headerDiv);
+
+                    // Raw answers if available
+                    if (Array.isArray(q.allRawAnswers) && q.allRawAnswers.length > 0) {
+                        let rawHtml = "<h4>Сирі відповіді (читабельні):</h4><ul>";
+                        q.allRawAnswers.forEach(r => {
+                            rawHtml += `<li>${r}</li>`;
+                        });
+                        rawHtml += "</ul>";
+                        
+                        const rawDiv = document.createElement("div");
+                        rawDiv.innerHTML = rawHtml;
+                        qDiv.appendChild(rawDiv);
+                    }
+
+                    // Typed values if available
+                    if (Array.isArray(q.typedValues) && q.typedValues.length > 0) {
+                        let tvHtml = "<h4>Введені значення:</h4><ul>";
+                        q.typedValues.forEach(tv => {
+                            tvHtml += `<li>${tv}</li>`;
+                        });
+                        tvHtml += "</ul>";
+                        
+                        const tvDiv = document.createElement("div");
+                        tvDiv.innerHTML = tvHtml;
+                        qDiv.appendChild(tvDiv);
+                    }
+
+                    // Details table if available
+                    if (q.answersDetail && q.answersDetail.length > 0) {
+                        const tableDiv = document.createElement("div");
+                        tableDiv.innerHTML = `
+                          <h4>Статистика відповідей:</h4>
+                          <table class="answer-stats">
+                            <thead>
+                              <tr><th>Відповідь</th><th>Кількість</th><th>%</th></tr>
+                            </thead>
+                            <tbody>
+                              ${q.answersDetail.map(a => `
+                                <tr>
+                                  <td>${a.answerValue}</td>
+                                  <td>${a.count}</td>
+                                  <td>${a.percent}</td>
+                                </tr>
+                              `).join('')}
+                            </tbody>
+                          </table>
+                        `;
+                        qDiv.appendChild(tableDiv);
+                    }
+
+                    // Chart if needed
+                    if (q.chartType === null) {
+                        const p = document.createElement("p");
+                        p.textContent = "Для цього питання діаграма не потрібна";
+                        p.style.color = "#888";
+                        p.style.fontStyle = "italic";
+                        p.style.textAlign = "center";
+                        p.style.margin = "1rem 0";
+                        qDiv.appendChild(p);
+                    } else {
+                        const cDiv = document.createElement("div");
+                        cDiv.className = "chart-container";
+                        const canvasId = `qchart_${idx}`;
+                        cDiv.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+                        qDiv.appendChild(cDiv);
+
+                        setTimeout(() => {
+                            const ctx = document.getElementById(canvasId).getContext("2d");
+                            const labels = q.answersDetail.map(d => d.answerValue);
+                            const dataVals = q.answersDetail.map(d => d.count);
+                            
+                            // Chart colors
+                            const backgroundColors = [
+                              '#FFB52E', '#E98A15', '#FFD700', '#FF9F45', 
+                              '#FFAA00', '#FF8C00', '#FFA07A', '#FFCE54'
+                            ];
+                            
+                            let chartOptions = {
+                              responsive: true,
+                              maintainAspectRatio: false,
+                              plugins: {
+                                legend: {
+                                  position: q.chartType === 'pie' ? 'right' : 'top'
+                                }
+                              }
+                            };
+                            
+                            if (q.chartType !== 'pie') {
+                              chartOptions.scales = {
+                                y: { 
+                                  beginAtZero: true,
+                                  grid: {
+                                    color: '#f0f0f0'
+                                  }
+                                },
+                                x: {
+                                  grid: {
+                                    display: false
+                                  }
+                                }
+                              };
+                            }
+                            
+                            new Chart(ctx, {
+                                type: q.chartType,
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        label: 'Відповіді',
+                                        data: dataVals,
+                                        backgroundColor: backgroundColors.slice(0, dataVals.length),
+                                        borderColor: q.chartType === 'pie' ? '#fff' : backgroundColors.slice(0, dataVals.length),
+                                        borderWidth: q.chartType === 'pie' ? 2 : 1
+                                    }]
+                                },
+                                options: chartOptions
+                            });
+                        }, 0);
+                    }
+
+                    questionsBlock.appendChild(qDiv);
+                });
+            });
+          </script>
+        </body>
+        </html>
+        

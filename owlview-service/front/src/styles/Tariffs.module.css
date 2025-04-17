@@ -1,0 +1,451 @@
+.tariffsContainer {
+	max-width: 700px;
+	margin: 2rem auto;
+	padding: 0 var(--container-padding);
+	position: relative;
+	animation: fadeIn 0.5s ease-out;
+	margin-top: 100px;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+.tariffsList {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 2rem;
+	margin-top: 2rem;
+}
+
+.tariffCard {
+	background: var(--background-primary);
+	border-radius: var(--border-radius-lg);
+	padding: 2rem;
+	box-shadow: var(--shadow-md);
+	transition: all var(--transition-speed) ease;
+	border: 1px solid var(--border-color);
+	position: relative;
+	overflow: hidden;
+	animation: cardAppear 0.6s ease-out;
+	animation-fill-mode: both;
+}
+
+@keyframes cardAppear {
+	from {
+		opacity: 0;
+		transform: scale(0.95) translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
+
+}
+
+.tariffCard:nth-child(1) {
+	animation-delay: 0.1s;
+}
+
+.tariffCard:nth-child(2) {
+	animation-delay: 0.2s;
+}
+
+.tariffCard:nth-child(3) {
+	animation-delay: 0.3s;
+}
+
+.tariffCard:nth-child(4) {
+	animation-delay: 0.4s;
+}
+
+.tariffCard:nth-child(5) {
+	animation-delay: 0.5s;
+}
+
+.tariffCard::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 4px;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	transition: all var(--transition-speed) ease;
+}
+
+.tariffCard:hover {
+	transform: translateY(-5px);
+	box-shadow: var(--shadow-lg);
+}
+
+.tariffCard:hover::before {
+	height: 8px;
+}
+
+.tariffCard h3 {
+	font-size: var(--font-size-lg);
+	color: var(--accent-primary);
+	margin-bottom: 1rem;
+	position: relative;
+	display: inline-block;
+	top: 15px;
+}
+
+.tariffCard h3::after {
+	content: "";
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	width: 50px;
+	height: 2px;
+	background: var(--accent-secondary);
+}
+
+.tariffCard p {
+	margin: 0.5rem 0;
+	color: var(--text-secondary);
+	font-size: var(--font-size-sm);
+}
+
+.tariffCard p strong {
+	color: var(--text-primary);
+	font-weight: var(--font-weight-medium);
+}
+
+.tariffCard ul {
+	margin: 1rem 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.tariffCard ul li {
+	background: rgba(255, 181, 46, 0.1);
+	color: var(--accent-secondary);
+	padding: 0.2rem 0.5rem;
+	border-radius: var(--border-radius-sm);
+	font-size: 0.75rem;
+	font-weight: var(--font-weight-bold);
+}
+
+.adminControls {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 1.5rem;
+}
+
+.toggleFormButton, .addTariffForm button, .tariffCard button {
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: var(--owl-white);
+	border: none;
+	padding: 0.7rem 1.5rem;
+	border-radius: var(--border-radius-md);
+	font-weight: var(--font-weight-medium);
+	transition: all var(--transition-speed) ease;
+	cursor: pointer;
+	box-shadow: var(--shadow-sm);
+}
+
+.tariffCard button:disabled {
+	background: var(--owl-medium);
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+.addTariffForm {
+	position: relative;
+	overflow: hidden;
+	border-radius: var(--border-radius-lg);
+	background: white;
+	padding: 2rem;
+	transition: all var(--transition-speed) ease;
+}
+
+.addTariffForm::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 4px;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	border-top-left-radius: var(--border-radius-lg);
+	border-top-right-radius: var(--border-radius-lg);
+	transition: all var(--transition-speed) ease;
+	z-index: 1;
+}
+
+.addTariffForm .formButtons {
+	display: flex;
+	gap: 1rem;
+	margin-top: 1.5rem;
+}
+
+.addTariffForm .formButtons button {
+	flex: 1;
+}
+
+.addTariffForm .formButtons button:last-child {
+	background: var(--owl-medium);
+}
+
+.addTariffForm .formButtons button:last-child:hover {
+	background: var(--owl-dark);
+}
+
+.toggleFormButton:hover, .addTariffForm button:hover, .tariffCard button:hover:not(:disabled) {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	background: linear-gradient(135deg, var(--owl-secondary), var(--owl-accent));
+}
+
+.addTariffForm {
+	background: rgba(242, 243, 245, 0.2);
+	padding: 2rem;
+	border-radius: var(--border-radius-lg);
+	margin: 2rem 0;
+	box-shadow: var(--shadow-md);
+	animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+.addTariffForm h2 {
+	color: var(--accent-primary);
+	margin-bottom: 1.5rem;
+	font-size: var(--font-size-xl);
+}
+
+.addTariffForm label {
+	display: block;
+	margin-bottom: 1rem;
+	color: var(--text-primary);
+	font-weight: var(--font-weight-medium);
+}
+
+.addTariffForm input, .addTariffForm select, .addTariffForm textarea {
+	width: 100%;
+	padding: 0.7rem;
+	margin-top: 0.5rem;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-md);
+	background: var(--background-primary);
+	color: var(--text-primary);
+	transition: all var(--transition-speed) ease;
+}
+
+.addTariffForm input:focus, .addTariffForm select:focus, .addTariffForm textarea:focus {
+	outline: none;
+	border-color: var(--accent-primary);
+	box-shadow: 0 0 0 2px rgba(245, 161, 34, 0.2);
+}
+
+.questionTypes {
+	margin: 1.5rem 0;
+}
+
+.questionTypes p {
+	font-weight: var(--font-weight-medium);
+	margin-bottom: 0.5rem;
+}
+
+.questionTypes div {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.5rem;
+}
+
+.questionTypes label {
+	display: flex;
+	align-items: center;
+	background: var(--background-secondary);
+	padding: 0.5rem 1rem;
+	border-radius: var(--border-radius-md);
+	cursor: pointer;
+	transition: all var(--transition-speed) ease;
+	margin-bottom: 0;
+}
+
+.questionTypes label:hover {
+	background: rgba(255, 181, 46, 0.1);
+}
+
+.questionTypes input[type="checkbox"] {
+	width: auto;
+	margin-right: 0.5rem;
+	margin-top: 0;
+}
+
+.formButtons button {
+	flex: 1;
+	padding: 0.8rem;
+	border: none;
+	border-radius: var(--border-radius-md);
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	transition: all var(--transition-speed) ease;
+}
+
+.formButtons button:first-child {
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: white;
+}
+
+.formButtons button:last-child {
+	background: var(--owl-medium);
+	color: white;
+}
+
+.formButtons button:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+}
+
+.formButtons button:first-child:hover {
+	background: linear-gradient(135deg, var(--owl-secondary), var(--owl-accent));
+}
+
+.formButtons button:last-child:hover {
+	background: var(--owl-dark);
+}
+
+@media (max-width:600px) {
+	.questionTypes div {
+		grid-template-columns: 1fr;
+	}
+
+	.formButtons {
+		flex-direction: column;
+	}
+
+}
+
+.priceBadge {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: white;
+	padding: 0.3rem 1rem;
+	border-radius: var(--border-radius-md);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-sm);
+	box-shadow: var(--shadow-sm);
+}
+
+.statusBadge {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	padding: 0.3rem 1rem;
+	border-radius: var(--border-radius-md);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-sm);
+}
+
+.statusActive {
+	background: rgba(46, 204, 113, 0.2);
+	color: #2ecc71;
+}
+
+.statusDraft {
+	background: rgba(241, 196, 15, 0.2);
+	color: #f1c40f;
+}
+
+.statusCompleted {
+	background: rgba(231, 76, 60, 0.2);
+	color: #e74c3c;
+}
+
+@media (max-width:768px) {
+	.tariffsList {
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	}
+
+	.adminControls {
+		flex-direction: column;
+	}
+
+	.adminControls button {
+		width: 100%;
+	}
+
+}
+
+@media (max-width:480px) {
+	.tariffsContainer {
+		padding: 0 1rem;
+	}
+
+	.tariffCard {
+		padding: 1.5rem;
+	}
+
+	.addTariffForm {
+		padding: 1.5rem;
+	}
+
+}
+
+.questionGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	gap: 0.5rem;
+}
+
+.questionLabel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.6rem 1rem;
+	border-radius: var(--border-radius-md);
+	background: var(--background-secondary);
+	color: var(--text-primary);
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-align: center;
+}
+
+.activeQuestion {
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: white;
+	font-weight: var(--font-weight-bold);
+}
+
+.noTariffs {
+	width: 700px;
+	margin: 2rem auto;
+	padding: 1.5rem 2rem;
+	text-align: center;
+	font-size: 1.2rem;
+  background-color: rgba(79, 93, 117, 0.1);
+  color: var(--owl-medium);
+	border-radius: 12px;
+	font-style: italic;
+	opacity: 0.95;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}

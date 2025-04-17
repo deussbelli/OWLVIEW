@@ -1,0 +1,391 @@
+.rechargeContainer, .requestsContainer {
+	max-width: 1200px;
+	margin: 2rem auto;
+	padding: 2rem;
+	position: relative;
+	overflow: hidden;
+	animation: fadeIn 0.6s ease-out;
+}
+
+.rechargeContainer::before, .requestsContainer::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	background: radial-gradient(circle at 20% 30%, rgba(255, 181, 46, 0.05) 0%, transparent 20%), radial-gradient(circle at 80% 70%, rgba(233, 138, 21, 0.05) 0%, transparent 20%);
+	animation: rotateBackground 60s linear infinite;
+}
+
+@keyframes rotateBackground {
+	0% {
+		transform: rotate(0deg) scale(1);
+	}
+
+	50% {
+		transform: rotate(180deg) scale(1.1);
+	}
+
+	100% {
+		transform: rotate(360deg) scale(1);
+	}
+
+}
+
+h2 {
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+	color: var(--text-primary);
+	position: relative;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+h2::after {
+	content: "";
+	display: block;
+	width: 100px;
+	height: 4px;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	margin: 1rem auto 0;
+	border-radius: 2px;
+}
+
+@keyframes textGlow {
+	0% {
+		text-shadow: 0 0 10px rgba(255, 181, 46, 0.3);
+	}
+
+	100% {
+		text-shadow: 0 0 20px rgba(233, 138, 21, 0.5);
+	}
+
+}
+
+.balanceInfo {
+	background: rgb(211, 212, 215);
+	backdrop-filter: blur(10px);
+	border-radius: var(--border-radius-lg);
+	padding: 1.5rem;
+	margin: 1.5rem 0;
+	text-align: center;
+	box-shadow: var(--shadow-sm);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	transition: all 0.3s ease;
+}
+
+.balanceInfo:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--shadow-md);
+}
+
+.balanceInfo p {
+	font-size: 1.2rem;
+	margin: 0.5rem 0;
+}
+
+.balanceInfo p:first-child {
+	font-weight: var(--font-weight-bold);
+}
+
+.requestForm {
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border-radius: var(--border-radius-lg);
+	padding: 2rem;
+	margin: 2rem 0;
+	box-shadow: var(--shadow-md);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	animation: slideUp 0.5s ease-out;
+}
+
+.requestForm h3 {
+	margin-top: 0;
+	margin-bottom: 1.5rem;
+	color: var(--owl-accent);
+}
+
+.requestForm input, .requestForm textarea {
+	width: 100%;
+	padding: 0.8rem 1rem;
+	margin-bottom: 1rem;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-md);
+	background-color: rgba(255, 255, 255, 0.1);
+	color: var(--text-primary);
+	font-size: var(--font-size-md);
+	transition: all var(--transition-speed) ease;
+}
+
+.requestForm input:focus, .requestForm textarea:focus {
+	outline: none;
+	border-color: var(--owl-accent);
+	box-shadow: 0 0 0 3px rgba(245, 161, 34, 0.2);
+}
+
+.requestForm textarea {
+	min-height: 100px;
+	resize: vertical;
+}
+
+.requestForm button {
+	width: 100%;
+	padding: 1rem;
+	border: none;
+	border-radius: var(--border-radius-md);
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: var(--owl-dark);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-md);
+	cursor: pointer;
+	transition: all var(--transition-speed) ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.requestForm button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(233, 138, 21, 0.4);
+}
+
+.requestForm button:disabled {
+	background: var(--owl-medium);
+	color: var(--owl-accent);
+	cursor: not-allowed;
+	transform: none;
+	box-shadow: none;
+}
+
+.requestForm button::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	transition: all 0.5s ease;
+}
+
+.requestForm button:hover::after {
+	left: 100%;
+}
+
+.table, table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 1.5rem;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border-radius: var(--border-radius-lg);
+	overflow: hidden;
+	box-shadow: var(--shadow-md);
+	animation: slideUp 0.5s ease-out;
+}
+
+.table thead, table thead {
+	background: linear-gradient(135deg, rgba(245, 161, 34, 0.2), rgba(233, 138, 21, 0.2));
+}
+
+.table th, table th {
+	padding: 1rem;
+	text-align: left;
+	color: var(--owl-accent);
+	font-weight: var(--font-weight-bold);
+	position: relative;
+}
+
+.table td, table td {
+	padding: 1rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	color: var(--text-secondary);
+	transition: all 0.3s ease;
+}
+
+.table tr:last-child td, table tr:last-child td {
+	border-bottom: none;
+}
+
+.table tr:hover td, table tr:hover td {
+	background: rgba(245, 161, 34, 0.05);
+	color: var(--text-primary);
+}
+
+.table tr, table tr {
+	transition: all 0.3s ease;
+}
+
+.table tr:hover, table tr:hover {
+	transform: translateX(5px);
+}
+
+.statusBadge {
+	display: inline-block;
+	padding: 0.3rem 0.6rem;
+	border-radius: 20px;
+	font-size: 0.8rem;
+	font-weight: var(--font-weight-bold);
+	text-transform: capitalize;
+}
+
+.statusBadge.pending {
+	background-color: rgba(255, 193, 7, 0.2);
+	color: #ffc107;
+	animation: pulse 1.5s infinite;
+}
+
+.statusBadge.approved {
+	background-color: rgba(76, 175, 80, 0.2);
+	color: #4caf50;
+}
+
+.statusBadge.rejected {
+	background-color: rgba(244, 67, 54, 0.2);
+	color: #f44336;
+}
+
+.actionButton {
+	padding: 0.5rem 1rem;
+	margin: 0.2rem;
+	border: none;
+	border-radius: var(--border-radius-sm);
+	font-weight: var(--font-weight-bold);
+	cursor: pointer;
+	transition: all var(--transition-speed) ease;
+}
+
+.actionButton.approve {
+	background-color: rgba(76, 175, 80, 0.2);
+	color: #4caf50;
+}
+
+.actionButton.reject {
+	background-color: rgba(244, 67, 54, 0.2);
+	color: #f44336;
+}
+
+.actionButton:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.error, .success {
+	padding: 1rem;
+	border-radius: var(--border-radius-md);
+	margin: 1rem 0;
+	text-align: center;
+	animation: fadeIn 0.5s ease-out;
+}
+
+.error {
+	background-color: rgba(244, 67, 54, 0.2);
+	color: #f44336;
+	border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.success {
+	background-color: rgba(76, 175, 80, 0.2);
+	color: #4caf50;
+	border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+
+}
+
+@keyframes slideUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+@keyframes pulse {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.5;
+	}
+
+	100% {
+		opacity: 1;
+	}
+
+}
+
+@media (max-width:1024px) {
+	.rechargeContainer, .requestsContainer {
+		padding: 1.5rem;
+	}
+
+	h2 {
+		font-size: 1.8rem;
+	}
+
+	.balanceInfo p {
+		font-size: 1.1rem;
+	}
+
+}
+
+@media (max-width:768px) {
+	.table, table {
+		display: block;
+		overflow-x: auto;
+	}
+
+	.requestForm {
+		padding: 1.5rem;
+	}
+
+	h2 {
+		font-size: 1.6rem;
+	}
+
+}
+
+@media (max-width:480px) {
+	.rechargeContainer, .requestsContainer {
+		padding: 1rem;
+	}
+
+	h2 {
+		font-size: 1.4rem;
+	}
+
+	.requestForm {
+		padding: 1rem;
+	}
+
+	.table th, .table td, table th, table td {
+		padding: 0.75rem 0.5rem;
+		font-size: 0.9rem;
+	}
+
+	.actionButton {
+		padding: 0.4rem 0.8rem;
+		font-size: 0.8rem;
+	}
+
+}

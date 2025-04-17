@@ -1,0 +1,204 @@
+.serverDownContainer {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.errorBackground {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	background: radial-gradient(circle at 20% 30%, rgba(255, 46, 46, 0.1) 0%, transparent 20%), radial-gradient(circle at 80% 70%, rgba(233, 21, 21, 0.1) 0%, transparent 20%), linear-gradient(45deg, rgba(66, 47, 47, 0.05) 0%, transparent 100%);
+	animation: pulseBackground 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseBackground {
+	0% {
+		opacity: 0.3;
+		transform: scale(1);
+	}
+
+	100% {
+		opacity: 0.5;
+		transform: scale(1.05);
+	}
+
+}
+
+.serverDownContainer h1 {
+	margin-bottom: 1.5rem;
+	font-size: 2.5rem;
+	background: linear-gradient(90deg, #ff2e2e, #e91515);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	animation: textErrorGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textErrorGlow {
+	0% {
+		text-shadow: 0 0 10px rgba(255, 46, 46, 0.3);
+	}
+
+	100% {
+		text-shadow: 0 0 20px rgba(233, 21, 21, 0.5);
+	}
+
+}
+
+.serverDownContainer p {
+	font-size: 1.25rem;
+	color: var(--text-secondary);
+	max-width: 600px;
+	margin: 0 auto 2rem;
+	line-height: 1.6;
+}
+
+.errorIcon {
+	font-size: 4rem;
+	margin-bottom: 2rem;
+	color: #ff2e2e;
+	animation: bounce 2s infinite, shake 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+	0%, 100% {
+		transform: translateY(0);
+	}
+
+	50% {
+		transform: translateY(-20px);
+	}
+
+}
+
+@keyframes shake {
+	0% {
+		transform: rotate(-5deg);
+	}
+
+	100% {
+		transform: rotate(5deg);
+	}
+
+}
+
+.retryButton {
+	background: linear-gradient(135deg, #ff2e2e, #e91515);
+	color: white;
+	border: none;
+	padding: 0.75rem 1.5rem;
+	font-size: 1rem;
+	border-radius: var(--border-radius-lg);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(255, 46, 46, 0.3);
+	margin-top: 1rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.retryButton:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 25px rgba(255, 46, 46, 0.4);
+}
+
+.retryButton::after {
+	content: "";
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: linear-gradient(to bottom right, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 55%);
+	transform: rotate(30deg);
+	animation: shine 3s infinite;
+}
+
+@keyframes shine {
+	0% {
+		left: -50%;
+	}
+
+	100% {
+		left: 150%;
+	}
+
+}
+
+.loadingBar {
+	width: 100%;
+	max-width: 300px;
+	height: 6px;
+	background: rgba(255, 46, 46, 0.2);
+	border-radius: 3px;
+	margin: 2rem auto;
+	overflow: hidden;
+}
+
+.loadingProgress {
+	height: 100%;
+	width: 0%;
+	background: linear-gradient(90deg, #ff2e2e, #e91515);
+	border-radius: 3px;
+	animation: loadingAnimation 3s infinite linear;
+}
+
+@keyframes loadingAnimation {
+	0% {
+		width: 0%;
+		left: 0;
+	}
+
+	50% {
+		width: 100%;
+		left: 0;
+	}
+
+	100% {
+		width: 0%;
+		left: 100%;
+	}
+
+}
+
+@media (max-width:768px) {
+	.serverDownContainer h1 {
+		font-size: 2rem;
+	}
+
+	.serverDownContainer p {
+		font-size: 1rem;
+	}
+
+	.errorIcon {
+		font-size: 3rem;
+	}
+
+}
+
+@media (max-width:480px) {
+	.serverDownContainer h1 {
+		font-size: 1.8rem;
+	}
+
+	.serverDownContainer {
+		padding: 1rem;
+	}
+
+	.retryButton {
+		padding: 0.6rem 1.2rem;
+		font-size: 0.9rem;
+	}
+
+}

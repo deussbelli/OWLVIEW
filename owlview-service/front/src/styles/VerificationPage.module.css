@@ -1,0 +1,338 @@
+.container {
+	max-width: 100%;
+	margin: 2rem auto;
+	padding: 2rem;
+	position: relative;
+	overflow: hidden;
+	min-height: calc(100vh - var(--header-height) - 4rem);
+	margin-top: 100px;
+}
+
+.animatedBackground {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	background: radial-gradient(circle at 20% 30%, rgba(255, 181, 46, 0.1) 0%, transparent 20%), radial-gradient(circle at 80% 70%, rgba(233, 138, 21, 0.1) 0%, transparent 20%), linear-gradient(45deg, rgba(47, 53, 66, 0.05) 0%, transparent 100%);
+	animation: rotateBackground 60s linear infinite;
+}
+
+@keyframes rotateBackground {
+	0% {
+		transform: rotate(0deg) scale(1);
+	}
+
+	50% {
+		transform: rotate(180deg) scale(1.1);
+	}
+
+	100% {
+		transform: rotate(360deg) scale(1);
+	}
+
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 2rem;
+	font-size: 2.5rem;
+	background: linear-gradient(90deg, var(--owl-accent), var(--owl-secondary));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	animation: textGlow 3s ease-in-out infinite alternate;
+	position: relative;
+}
+
+h1::after {
+	content: "";
+	display: block;
+	width: 150px;
+	height: 4px;
+	background: var(--accent-primary);
+	margin: 1rem auto 0;
+	border-radius: 2px;
+}
+
+@keyframes textGlow {
+	0% {
+		text-shadow: 0 0 10px rgba(255, 181, 46, 0.3);
+	}
+
+	100% {
+		text-shadow: 0 0 20px rgba(233, 138, 21, 0.5);
+	}
+
+}
+
+.tableWrapper {
+	overflow-x: auto;
+	margin: 2rem 0;
+	border-radius: var(--border-radius-lg);
+	box-shadow: var(--shadow-lg);
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	animation: fadeInUp 0.8s ease-out;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	color: var(--text-primary);
+}
+
+th, td {
+	padding: 1rem;
+	text-align: left;
+	border-bottom: 1px solid var(--divider-color);
+	transition: all 0.3s ease;
+}
+
+th {
+	background-color: rgba(245, 161, 34, 0.1);
+	font-weight: var(--font-weight-bold);
+	color: var(--owl-accent);
+	position: sticky;
+	top: 0;
+}
+
+tr:hover {
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+tr:hover td {
+	transform: translateX(5px);
+}
+
+td a {
+	color: var(--owl-accent);
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+td a::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background: var(--owl-accent);
+	transition: width 0.3s ease;
+}
+
+td a:hover::after {
+	width: 100%;
+}
+
+.buttonGroup {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.button {
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: var(--border-radius-md);
+	font-weight: var(--font-weight-bold);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 100px;
+}
+
+.button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.approveButton {
+	background: linear-gradient(135deg, #4CAF50, #2E7D32);
+	color: white;
+}
+
+.approveButton:hover {
+	background: linear-gradient(135deg, #66BB6A, #388E3C);
+}
+
+.rejectButton {
+	background: linear-gradient(135deg, #F44336, #D32F2F);
+	color: white;
+}
+
+.rejectButton:hover {
+	background: linear-gradient(135deg, #EF5350, #E53935);
+}
+
+.emptyState {
+	text-align: center;
+	padding: 3rem;
+	color: var(--text-secondary);
+	animation: fadeIn 1s ease-out;
+}
+
+.emptyStateIcon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+	display: inline-block;
+	animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+	0%, 100% {
+		transform: translateY(0);
+	}
+
+	50% {
+		transform: translateY(-10px);
+	}
+
+}
+
+.rejectionModal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	animation: fadeIn 0.3s ease-out;
+}
+
+.modalContent {
+	background: var(--background-primary);
+	padding: 2rem;
+	border-radius: var(--border-radius-lg);
+	width: 90%;
+	max-width: 500px;
+	box-shadow: var(--shadow-lg);
+	animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideUp {
+	from {
+		transform: translateY(50px);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+}
+
+.textarea {
+	width: 100%;
+	min-height: 150px;
+	padding: 1rem;
+	margin: 1rem 0;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-md);
+	background: rgba(255, 255, 255, 0.05);
+	color: var(--text-primary);
+	resize: vertical;
+	transition: all 0.3s ease;
+}
+
+.textarea:focus {
+	outline: none;
+	border-color: var(--owl-accent);
+	box-shadow: 0 0 0 3px rgba(245, 161, 34, 0.2);
+}
+
+.submitButton {
+	background: linear-gradient(135deg, var(--owl-accent), var(--owl-secondary));
+	color: var(--owl-dark);
+	width: 100%;
+	padding: 0.8rem;
+	font-size: 1rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.submitButton::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	transition: all 0.5s ease;
+}
+
+.submitButton:hover::after {
+	left: 100%;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+@media (max-width:768px) {
+	.container {
+		padding: 1rem;
+	}
+
+	h1 {
+		font-size: 2rem;
+	}
+
+	th, td {
+		padding: 0.75rem;
+		font-size: 0.9rem;
+	}
+
+	.button {
+		min-width: 80px;
+		padding: 0.5rem;
+		font-size: 0.8rem;
+	}
+
+}
+
+@media (max-width:480px) {
+	h1 {
+		font-size: 1.8rem;
+	}
+
+	.buttonGroup {
+		flex-direction: column;
+	}
+
+	.button {
+		width: 100%;
+	}
+
+}

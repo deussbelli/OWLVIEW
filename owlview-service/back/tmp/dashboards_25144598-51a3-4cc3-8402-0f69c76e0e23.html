@@ -1,0 +1,178 @@
+
+        <html>
+        <head>
+          <meta charset="utf-8"/>
+          <title>Дашборды опроса 25144598-51a3-4cc3-8402-0f69c76e0e23</title>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <style>
+            body {
+              font-family: sans-serif;
+              margin: 20px;
+            }
+            .chart-container {
+              width: 600px;
+              height: 400px;
+              margin-bottom: 30px;
+            }
+            .question-block {
+              border: 1px solid #ccc;
+              padding: 15px;
+              margin-bottom: 30px;
+            }
+            table.answer-stats {
+              border-collapse: collapse;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+            table.answer-stats th,
+            table.answer-stats td {
+              border: 1px solid #ccc;
+              padding: 5px 10px;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Дашборды опроса 25144598-51a3-4cc3-8402-0f69c76e0e23</h1>
+          <p>
+            <b>Приглашены:</b> 5 |
+            <b>Пройдено:</b> 1 |
+            <b>Отложено:</b> 0 |
+            <b>В процессе:</b> 4 |
+            <b>Среднее время (мин):</b> 3132.57
+          </p>
+
+          <!-- Общая диаграмма -->
+          <div class="chart-container">
+            <canvas id="overallChart"></canvas>
+          </div>
+
+          <!-- Контейнер для вопросов -->
+          <div id="questionsBlock"></div>
+
+          <script>
+            const analyticsData = {"invited_count": 5, "completed_count": 1, "postponed_count": 0, "in_progress_count": 4, "average_time_minutes": 3132.57, "question_analytics": [{"questionId": "q_1744492713060", "questionType": "q101", "title": "ВЫ", "chartType": "pie", "answersDetail": [{"answerValue": "ЫВ", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["Выбрано: ЫВ |"], "averageValue": null}, {"questionId": "q_1744492713557", "questionType": "q102", "title": "ЫВ", "chartType": "bar", "answersDetail": [{"answerValue": "Ы", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["Выбрано: Ы |"], "averageValue": null}, {"questionId": "q_1744492713944", "questionType": "q103", "title": "ЫВ", "chartType": "pie", "answersDetail": [{"answerValue": "ЫВ", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["Выбрано: ЫВ |"], "averageValue": null}, {"questionId": "q_1744492714616", "questionType": "q104", "title": "ЫВ", "chartType": "bar", "answersDetail": [{"answerValue": "ans1744492764484 | ans1744492770562", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["ans1744492764484 | ans1744492770562 |"], "averageValue": null}, {"questionId": "q_1744492714995", "questionType": "q105", "title": "ЫВ", "chartType": "bar", "answersDetail": [{"answerValue": "ans1744492794302 | ans1744492797304", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["ans1744492794302 | ans1744492797304 |"], "averageValue": null}, {"questionId": "q_1744492715406", "questionType": "q201", "title": "ЫЫЫЫЫЫЫЫЫЫЫЫЫ", "chartType": null, "answersDetail": [{"answerValue": "", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["Выбрано:  |"], "averageValue": null}, {"questionId": "q_1744492715816", "questionType": "q202", "title": "ЫВ", "chartType": null, "answersDetail": [{"answerValue": "", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["Выбрано:  |"], "averageValue": null}, {"questionId": "q_1744492716234", "questionType": "q301", "title": "ЫВ", "chartType": null, "answersDetail": [], "typedValues": ["1"], "allRawAnswers": [], "averageValue": 1.0}, {"questionId": "q_1744492716739", "questionType": "q302", "title": "ЫВ", "chartType": null, "answersDetail": [], "typedValues": ["2"], "allRawAnswers": [], "averageValue": 2.0}, {"questionId": "q_1744492717333", "questionType": "q303", "title": "ВЫ", "chartType": null, "answersDetail": [], "typedValues": ["1"], "allRawAnswers": [], "averageValue": null}, {"questionId": "q_1744492717818", "questionType": "q304", "title": "ВЫ", "chartType": null, "answersDetail": [], "typedValues": ["2"], "allRawAnswers": [], "averageValue": null}, {"questionId": "q_1744492730424", "questionType": "q305", "title": "ЫВ", "chartType": null, "answersDetail": [], "typedValues": ["2"], "allRawAnswers": [], "averageValue": null}, {"questionId": "q_1744492731452", "questionType": "q306", "title": "ЫВ", "chartType": "bar", "answersDetail": [{"answerValue": "field_0=1", "count": 1, "percent": 33.3}, {"answerValue": "field_1=2", "count": 1, "percent": 33.3}, {"answerValue": "field_2=2", "count": 1, "percent": 33.3}], "typedValues": [], "allRawAnswers": ["field_0=1 | field_1=2 | field_2=2 |"], "averageValue": null}, {"questionId": "q_1744492731956", "questionType": "q401", "title": "ЫВ", "chartType": "bar", "answersDetail": [{"answerValue": "selected_scale=1", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["selected_scale=1 |"], "averageValue": null}, {"questionId": "q_1744492732425", "questionType": "q402", "title": "УК", "chartType": "bar", "answersDetail": [{"answerValue": "selected_scale=3", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["selected_scale=3 |"], "averageValue": null}, {"questionId": "q_1744492733396", "questionType": "q403", "title": "в", "chartType": "bar", "answersDetail": [{"answerValue": "sliderIndex=2", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["sliderIndex=2 |"], "averageValue": null}, {"questionId": "q_1744492733863", "questionType": "q404", "title": "21", "chartType": "bar", "answersDetail": [{"answerValue": "sliderIndex=4", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["sliderIndex=4 |"], "averageValue": null}, {"questionId": "q_1744492734321", "questionType": "q405", "title": "231", "chartType": "bar", "answersDetail": [{"answerValue": "starValue=4", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["starValue=4 |"], "averageValue": null}, {"questionId": "q_1744492734737", "questionType": "q501", "title": "цук", "chartType": "bar", "answersDetail": [{"answerValue": "c0 | c1", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["c0 | c1 |"], "averageValue": null}, {"questionId": "q_1744492735229", "questionType": "q502", "title": "asd", "chartType": "bar", "answersDetail": [{"answerValue": "c1, c0 | c0", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["c1, c0 | c0 |"], "averageValue": null}, {"questionId": "q_1744492735725", "questionType": "q503", "title": "asd", "chartType": "bar", "answersDetail": [{"answerValue": "0, 1 | 1", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["0, 1 | 1 |"], "averageValue": null}, {"questionId": "q_1744492736416", "questionType": "q504", "title": "sdf", "chartType": "bar", "answersDetail": [{"answerValue": "0, 1 | 0, 1", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["0, 1 | 0, 1 |"], "averageValue": null}, {"questionId": "q_1744492737046", "questionType": "q505", "title": "asd", "chartType": "bar", "answersDetail": [{"answerValue": "1 | 1", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["1 | 1 |"], "averageValue": null}, {"questionId": "q_1744492738083", "questionType": "q506", "title": "asd", "chartType": "bar", "answersDetail": [{"answerValue": "2", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["2 |"], "averageValue": null}, {"questionId": "q_1744492738629", "questionType": "q507", "title": "asd", "chartType": "bar", "answersDetail": [{"answerValue": "yes | no | yes", "count": 1, "percent": 100.0}], "typedValues": [], "allRawAnswers": ["yes | no | yes |"], "averageValue": null}]};
+
+            window.addEventListener("DOMContentLoaded", () => {
+                // Общая диаграмма
+                const c1 = document.getElementById("overallChart").getContext("2d");
+                new Chart(c1, {
+                  type: 'bar',
+                  data: {
+                    labels: ['Приглашены','Пройдено','Отложено','В процессе'],
+                    datasets: [{
+                      label: 'Респонденты',
+                      data: [
+                        analyticsData.invited_count,
+                        analyticsData.completed_count,
+                        analyticsData.postponed_count,
+                        analyticsData.in_progress_count
+                      ]
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    scales: {
+                      y: { beginAtZero: true }
+                    }
+                  }
+                });
+
+                // Вывод вопросов
+                const questionsBlock = document.getElementById("questionsBlock");
+
+                analyticsData.question_analytics.forEach((q, idx) => {
+                    const qDiv = document.createElement("div");
+                    qDiv.className = "question-block";
+                    qDiv.innerHTML = `
+                      <h2>Вопрос #${idx+1}: ${q.title}</h2>
+                      <p><b>ID:</b> ${q.questionId}, <b>Тип:</b> ${q.questionType}</p>
+                    `;
+
+                    // Сырые ответы (allRawAnswers)
+                    if (Array.isArray(q.allRawAnswers) && q.allRawAnswers.length > 0) {
+                        let rawHtml = "<h4>Сырые ответы (читаемые):</h4><ul>";
+                        q.allRawAnswers.forEach(r => {
+                            // Если хотите дополнительно проверять, не ли там (Изображение) и делать <img>, можно здесь
+                            rawHtml += `<li>${r}</li>`;
+                        });
+                        rawHtml += "</ul>";
+                        qDiv.innerHTML += rawHtml;
+                    }
+
+                    // typedValues (например, q301..q305)
+                    if (Array.isArray(q.typedValues) && q.typedValues.length > 0) {
+                        let tvHtml = "<h4>Тексты (введённые значения):</h4><ul>";
+                        q.typedValues.forEach(tv => {
+                            tvHtml += `<li>${tv}</li>`;
+                        });
+                        tvHtml += "</ul>";
+                        qDiv.innerHTML += tvHtml;
+                    }
+
+                    // Если хотим показать агрегированную статистику
+                    // (можно отключить для таблиц/множественных, если не нужно)
+                    if (q.answersDetail && q.answersDetail.length > 0) {
+                        let tableHtml = `
+                          <table class="answer-stats">
+                            <thead>
+                              <tr><th>Ответ</th><th>Кол-во</th><th>%</th></tr>
+                            </thead>
+                            <tbody>
+                        `;
+                        q.answersDetail.forEach(a => {
+                            tableHtml += `
+                              <tr>
+                                <td>${a.answerValue}</td>
+                                <td>${a.count}</td>
+                                <td>${a.percent}</td>
+                              </tr>
+                            `;
+                        });
+                        tableHtml += "</tbody></table>";
+                        qDiv.innerHTML += tableHtml;
+                    }
+
+                    // Строим диаграмму?
+                    if (q.chartType === null) {
+                        // Нет диаграммы
+                        const p = document.createElement("p");
+                        p.textContent = "Для данных вопросов не нужны диаграммы";
+                        qDiv.appendChild(p);
+                    } else {
+                        // Рисуем Chart.js
+                        const cDiv = document.createElement("div");
+                        cDiv.className = "chart-container";
+                        const canvasId = `qchart_${idx}`;
+                        cDiv.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+                        qDiv.appendChild(cDiv);
+
+                        setTimeout(() => {
+                            const ctx = document.getElementById(canvasId).getContext("2d");
+                            const labels = q.answersDetail.map(d => d.answerValue);
+                            const dataVals = q.answersDetail.map(d => d.count);
+                            new Chart(ctx, {
+                                type: q.chartType,
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        label: 'Ответы',
+                                        data: dataVals
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    scales: (q.chartType === 'pie') ? {} : {
+                                        y: { beginAtZero: true }
+                                    }
+                                }
+                            });
+                        }, 0);
+                    }
+
+                    questionsBlock.appendChild(qDiv);
+                });
+            });
+          </script>
+        </body>
+        </html>
+        

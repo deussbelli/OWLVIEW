@@ -1,0 +1,79 @@
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Дашборды опроса 8a3000fb-754f-43eb-b701-687946b55f5b</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Дашборды опроса 8a3000fb-754f-43eb-b701-687946b55f5b</h1>
+  <p>Ниже представлены диаграммы для каждого вопроса.</p>
+  <h3>Ваш любимый цвет?</h3>
+<canvas id="chart_c3edae6b958b4f1a89d98e78fad25c51" width="400" height="200" style="margin-bottom: 20px;"></canvas>
+<h3>Оцените наш сервис (звёздочки)</h3>
+<canvas id="chart_7b970ca77aa642f2b3860189a3a41aa6" width="400" height="200" style="margin-bottom: 20px;"></canvas>
+  <script>
+    
+var ctx_0 = document.getElementById('chart_c3edae6b958b4f1a89d98e78fad25c51').getContext('2d');
+new Chart(ctx_0, {
+    type: 'bar',
+    data: {
+        labels: ['red', 'blue', 'green'],
+        datasets: [{
+            label: 'Ваш любимый цвет?',
+            data: [3, 5, 4],
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { position: 'top' },
+            title: {
+                display: false,
+                text: 'Ваш любимый цвет?'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+var ctx_1 = document.getElementById('chart_7b970ca77aa642f2b3860189a3a41aa6').getContext('2d');
+new Chart(ctx_1, {
+    type: 'bar',
+    data: {
+        labels: ['1', '2', '3', '4', '5'],
+        datasets: [{
+            label: 'Оцените наш сервис (звёздочки)',
+            data: [1, 2, 2, 3, 2],
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { position: 'top' },
+            title: {
+                display: false,
+                text: 'Оцените наш сервис (звёздочки)'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+  </script>
+</body>
+</html>

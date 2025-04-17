@@ -1,0 +1,459 @@
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	background: var(--primary-color);
+	box-shadow: var(--shadow);
+	color: white;
+	transition: var(--transition);
+	border-bottom: 2px solid var(--accent-color);
+	height: var(--header-height);
+	backdrop-filter: blur(8px);
+	background-color: rgba(45, 49, 66, 0.95);
+	display: flex;
+	align-items: center;
+}
+
+.header:hover {
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.headerContent {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 2rem;
+	width: 100%;
+	height: 100%;
+}
+
+.logo {
+	font-size: 3.8rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: var(--transition);
+	position: relative;
+	padding: 0 1rem;
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.5px;
+	background: linear-gradient(40deg, #ed751b, #fcc628, #ed751b, #d07f19, #fac163, #ed751b, #d07f19, #ed751b, var(--accent-color), #ed751b, #fcc628);
+	background-size: 200% auto;
+	color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	animation: textShine 3s linear infinite;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.owlLogo {
+	height: 400px;
+	width: auto;
+}
+
+@keyframes textShine {
+	0% {
+		background-position: 0% center;
+	}
+
+	100% {
+		background-position: 200% center;
+	}
+
+}
+
+.logo:hover {
+	transform: translateY(-2px);
+	animation: textShine 1.5s linear infinite;
+}
+
+.logo::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 0;
+	height: 3px;
+	background: var(--accent-color);
+	transition: var(--transition);
+}
+
+.logo:hover::after {
+	width: 80%;
+}
+
+.headerNav {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	flex: 1;
+	justify-content: center;
+	height: 100%;
+}
+
+.navButton {
+	position: relative;
+	background: transparent;
+	border: none;
+	color: white;
+	padding: 0 1.2rem;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 1.2rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	transition: var(--transition);
+	overflow: hidden;
+	z-index: 1;
+	height: 100%;
+}
+
+.navButton::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(245, 161, 34, 0.1);
+	z-index: -1;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+	border-radius: 6px;
+}
+
+.navButton:hover {
+	color: var(--accent-color);
+}
+
+.navButton:hover::before {
+	transform: scaleX(1);
+	transform-origin: left;
+}
+
+.navButton.active {
+	color: var(--accent-color);
+	font-weight: 700;
+}
+
+.navButton.active::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 30px;
+	height: 3px;
+	background: var(--accent-color);
+	border-radius: 3px;
+	animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.5;
+	}
+
+	100% {
+		opacity: 1;
+	}
+
+}
+
+.notificationBadge {
+	position: absolute;
+	top: 4px;
+	right: 0px;
+	background: var(--accent-color);
+	color: var(--dark-color);
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.7rem;
+	font-weight: bold;
+	animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+	from {
+		transform: translateY(0);
+	}
+
+	to {
+		transform: translateY(-3px);
+	}
+
+}
+
+.userInfo {
+	color: white;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.cabinetButton, .logoutButton {
+	padding: 0.7rem 1.2rem;
+	border-radius: 6px;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 1.2rem;
+	transition: var(--transition);
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.cabinetButton {
+	background: rgba(245, 161, 34, 0.1);
+	color: white;
+	border: 1px solid var(--accent-color);
+}
+
+.cabinetButton:hover {
+	background: rgba(245, 161, 34, 0.2);
+	transform: translateY(-2px);
+}
+
+.logoutButton {
+	background: var(--accent-color);
+	color: var(--dark-color);
+	font-weight: 700;
+}
+
+.logoutButton:hover {
+	background: #ffb347;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(245, 161, 34, 0.3);
+}
+
+.authButtons, .userInfo {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	height: 100%;
+}
+
+.loginButton, .registerButton, .cabinetButton, .logoutButton {
+	padding: 0 1.5rem;
+	border-radius: 6px;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 1.2rem;
+	transition: var(--transition);
+	display: flex;
+	align-items: center;
+	height: 80%;
+}
+
+.loginButton {
+	background: transparent;
+	color: white;
+	border: 2px solid var(--accent-color);
+}
+
+.registerButton {
+	background: var(--accent-color);
+	color: var(--dark-color);
+	font-weight: 700;
+}
+
+.registerButton:hover {
+	background: #ffb347;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(245, 161, 34, 0.3);
+}
+
+.sidebar {
+	position: fixed;
+	top: var(--header-height);
+	left: -340px;
+	width: 320px;
+	height: calc(100vh - var(--header-height));
+	background: linear-gradient(135deg, rgba(45, 49, 66, 0.98) 0%, rgba(31, 34, 53, 0.98) 100%);
+	transition: var(--transition);
+	z-index: 999;
+	box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
+	border-right: 2px solid var(--accent-color);
+	overflow-y: auto;
+}
+
+.sidebar.open {
+	left: 0;
+}
+
+.tabsContainer {
+	padding: 1.5rem 0;
+}
+
+.tabsList {
+	list-style: none;
+	color: white;
+	padding: 0;
+	margin: 0;
+}
+
+.tabsList li {
+	padding: 0.8rem 1.5rem;
+	margin: 0.3rem 0;
+	cursor: pointer;
+	color: white;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	transition: var(--transition);
+	position: relative;
+	overflow: hidden;
+}
+
+.tabsList li::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(245, 161, 34, 0.1), transparent);
+	transition: var(--transition);
+}
+
+.tabsList li:hover::before {
+	left: 100%;
+}
+
+.tabsList li:hover {
+	color: var(--accent-color);
+	background: rgba(245, 161, 34, 0.05);
+}
+
+.tabsList li.active {
+	color: var(--accent-color);
+	font-weight: 600;
+	background: rgba(245, 161, 34, 0.1);
+	border-left: 4px solid var(--accent-color);
+}
+
+.tabsList li.active .tabIcon {
+	transform: scale(1.2);
+}
+
+.tabIcon {
+	margin-right: 1rem;
+	font-size: 1.2rem;
+	transition: var(--transition);
+}
+
+.tabName {
+	flex-grow: 1;
+}
+
+.menuIcon {
+	display: block;
+	font-size: 1.5rem;
+	cursor: pointer;
+	padding: 0.5rem;
+	transition: var(--transition);
+	border-radius: 50%;
+	color: white;
+}
+
+.menuIcon:hover {
+	color: var(--accent-color);
+	background: rgba(245, 161, 34, 0.1);
+	transform: rotate(90deg);
+}
+
+@media (max-width:1024px) {
+	.headerNav {
+		display: none;
+	}
+
+	.menuIcon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.5rem;
+		cursor: pointer;
+		padding: 0.5rem;
+		transition: var(--transition);
+		border-radius: 50%;
+		color: white;
+		height: 100%;
+	}
+
+	.cabinetButton, .logoutButton {
+		display: none;
+	}
+
+}
+
+@media (max-width:768px) {
+	.headerContent {
+		padding: 0.8rem 1rem;
+	}
+
+	.logo {
+		font-size: 1.5rem;
+	}
+
+	.authButtons {
+		gap: 0.5rem;
+	}
+
+	.loginButton, .registerButton {
+		padding: 0.6rem 1rem;
+		font-size: 1.5rem;
+	}
+
+}
+
+@keyframes slideIn {
+	from {
+		transform: translateX(-100%);
+	}
+
+	to {
+		transform: translateX(0);
+	}
+
+}
+
+.sidebar.open {
+	animation: slideIn 0.3s ease-out forwards;
+}
+
+.sidebar::-webkit-scrollbar {
+	width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+	background: var(--accent-color);
+	border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+	background: #ffb347;
+}

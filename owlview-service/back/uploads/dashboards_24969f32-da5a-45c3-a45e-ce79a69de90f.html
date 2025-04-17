@@ -1,0 +1,198 @@
+
+        <html>
+        <head>
+          <meta charset="utf-8"/>
+          <title>Дашборды опроса 24969f32-da5a-45c3-a45e-ce79a69de90f</title>
+          <!-- Chart.js CDN -->
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <style>
+            body {
+              font-family: sans-serif; 
+              margin: 20px; 
+            }
+            .chart-container {
+              width: 600px; 
+              height: 400px; 
+              margin-bottom: 30px; 
+            }
+            .question-block {
+              border: 1px solid #ccc; 
+              padding: 15px; 
+              margin-bottom: 30px;
+            }
+            h2 {
+              margin-top: 0;
+            }
+            table.answer-stats {
+              border-collapse: collapse;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+            table.answer-stats th,
+            table.answer-stats td {
+              border: 1px solid #ccc;
+              padding: 5px 10px;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Дашборды опроса 24969f32-da5a-45c3-a45e-ce79a69de90f</h1>
+          <p>
+            <b>Приглашены:</b> 2 |
+            <b>Пройдено:</b> 2 |
+            <b>Отложено:</b> 0 |
+            <b>В процессе:</b> 0 |
+            <b>Среднее время (мин):</b> 1.42
+          </p>
+
+          <!-- Canvas для общей статистики (bar) -->
+          <div class="chart-container">
+            <canvas id="overallChart"></canvas>
+          </div>
+
+          <!-- Блоки для всех вопросов -->
+          <div id="questionsBlock"></div>
+
+          <script>
+            // Данные аналитики (JS-объект)
+            const analyticsData = {"invited_count": 2, "completed_count": 2, "postponed_count": 0, "in_progress_count": 0, "average_time_minutes": 1.42, "question_analytics": [{"questionId": "q_1742821376445", "questionType": "q101", "title": "Как часто вы пользуетесь общественным транспортом?", "chartType": "pie", "answersDetail": [{"answerValue": "Каждый день", "count": 1, "percent": 50.0}, {"answerValue": "Несколько раз в неделю", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821415471", "questionType": "q102", "title": "Какие социальные сети вы используете регулярно?", "chartType": "bar", "answersDetail": [{"answerValue": "Facebook", "count": 2, "percent": 66.7}, {"answerValue": "TikTok", "count": 1, "percent": 33.3}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821416026", "questionType": "q103", "title": "Выберите ваш текущий уровень образования:", "chartType": "pie", "answersDetail": [{"answerValue": "Среднее специальное", "count": 1, "percent": 50.0}, {"answerValue": "Неполное высшее", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821416355", "questionType": "q104", "title": "Насколько вы удовлетворены следующими аспектами вашей работы?", "chartType": "bar", "answersDetail": [{"answerValue": "sections={'sec1742821474610': ['ans1742821478515'], 'sec1742821483827': ['ans1742821496370']}", "count": 1, "percent": 50.0}, {"answerValue": "sections={'sec1742821474610': ['ans1742821479723'], 'sec1742821483827': ['ans1742821496370']}", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821416683", "questionType": "q105", "title": "Какие льготы на работе для вас важны?", "chartType": "bar", "answersDetail": [{"answerValue": "sections={'sec1742821513104': ['ans1742821524694', 'ans1742821525902'], 'sec1742821514433': ['ans1742821527509', 'ans1742821525433']}", "count": 1, "percent": 50.0}, {"answerValue": "sections={'sec1742821513104': ['ans1742821524694'], 'sec1742821514433': ['ans1742821526848']}", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821417011", "questionType": "q201", "title": "Выберите логотип, который вам нравится больше всего.", "chartType": "pie", "answersDetail": [{"answerValue": "", "count": 2, "percent": 100.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821417519", "questionType": "q202", "title": "Отметьте фотографии, которые вам нравятся.", "chartType": "bar", "answersDetail": [{"answerValue": "", "count": 3, "percent": 100.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821417930", "questionType": "q301", "title": "Сколько чашек кофе вы выпиваете в день?", "chartType": "bar", "answersDetail": [], "typedValues": ["5", "3"], "averageValue": 4.0}, {"questionId": "q_1742821418317", "questionType": "q302", "title": "Сколько литров воды вы выпиваете в день (введите с точностью до десятых)?", "chartType": "bar", "answersDetail": [], "typedValues": ["1.4", "3"], "averageValue": 2.2}, {"questionId": "q_1742821418751", "questionType": "q303", "title": " Назовите ваш любимый фильм.", "chartType": "bar", "answersDetail": [], "typedValues": ["fdg", "3"], "averageValue": null}, {"questionId": "q_1742821419255", "questionType": "q304", "title": "Опишите, что делает вас счастливым.", "chartType": null, "answersDetail": [], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821419696", "questionType": "q305", "title": "Расскажите, как вы справляетесь со стрессом.", "chartType": null, "answersDetail": [], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821420095", "questionType": "q306", "title": "Назовите 3 ваших хобби.", "chartType": "bar", "answersDetail": [{"answerValue": "field_0=d", "count": 1, "percent": 16.7}, {"answerValue": "field_1=f", "count": 1, "percent": 16.7}, {"answerValue": "field_2=g", "count": 1, "percent": 16.7}, {"answerValue": "field_0=3", "count": 1, "percent": 16.7}, {"answerValue": "field_1=2", "count": 1, "percent": 16.7}, {"answerValue": "field_2=3", "count": 1, "percent": 16.7}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821420529", "questionType": "q401", "title": "Оцените уровень вашей удовлетворенности:", "chartType": "bar", "answersDetail": [{"answerValue": "selected_scale=Средний", "count": 1, "percent": 50.0}, {"answerValue": "selected_scale=Очень низкий", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821420897", "questionType": "q402", "title": "Как вы оцениваете качество нашего сервиса?", "chartType": "bar", "answersDetail": [{"answerValue": "selected_scale=Высокий", "count": 1, "percent": 50.0}, {"answerValue": "selected_scale=Очень высокий", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821421350", "questionType": "q403", "title": "Насколько вы уверены в своих знаниях (0-10)?", "chartType": "bar", "answersDetail": [{"answerValue": "sliderIndex=3", "count": 1, "percent": 50.0}, {"answerValue": "sliderIndex=4", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821421807", "questionType": "q404", "title": "Насколько вам понравился вебинар (0-10)?", "chartType": "bar", "answersDetail": [{"answerValue": "sliderIndex=3", "count": 1, "percent": 50.0}, {"answerValue": "sliderIndex=2", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821422268", "questionType": "q405", "title": " Оцените фильм, который вы недавно посмотрели", "chartType": "bar", "answersDetail": [{"answerValue": "starValue=5", "count": 1, "percent": 50.0}, {"answerValue": "starValue=4", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821422675", "questionType": "q501", "title": "Укажите уровень владения языками", "chartType": "bar", "answersDetail": [{"answerValue": "Таблица: {\"r1\": [\"c2\"], \"r2\": [\"c4\"], \"r0\": [\"c2\"]}", "count": 1, "percent": 50.0}, {"answerValue": "Таблица: {\"r1\": [\"c2\"], \"r2\": [\"c3\"], \"r0\": [\"c3\"]}", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821423089", "questionType": "q502", "title": "Какие навыки вы используете на работе?", "chartType": "bar", "answersDetail": [{"answerValue": "Таблица: {\"r1\": [\"c1\", \"c2\"], \"r2\": [\"c3\"], \"r0\": [\"c0\"]}", "count": 1, "percent": 50.0}, {"answerValue": "Таблица: {\"r0\": [\"c3\"], \"r1\": [\"c3\"], \"r2\": [\"c3\"]}", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821423566", "questionType": "q503", "title": "Какая роль вам ближе?", "chartType": "bar", "answersDetail": [{"answerValue": "sections2={'sec21742821887906': {'0': [1], '1': [2]}}", "count": 1, "percent": 50.0}, {"answerValue": "sections2={'sec21742821887906': {'0': [2], '1': [1]}}", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821424008", "questionType": "q504", "title": "В каких ролях вы уже пробовали себя?", "chartType": "bar", "answersDetail": [{"answerValue": "sections2={'sec21742821954620': {'0': [1, 2], '1': [1]}}", "count": 1, "percent": 50.0}, {"answerValue": "sections2={'sec21742821954620': {'0': [2], '1': [1]}}", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821424422", "questionType": "q505", "title": "Какой транспорт вы используете?", "chartType": "bar", "answersDetail": [{"answerValue": "sections2={'sec21742821993924': {'1': [0], '2': [0]}}", "count": 1, "percent": 50.0}, {"answerValue": "sections2={'sec21742821993924': {'1': [0]}}", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821424931", "questionType": "q506", "title": "Какой основной вид транспорта вы используете?", "chartType": "bar", "answersDetail": [{"answerValue": "sections2={'sec21742822028911': {'1': [0], '2': [0]}}", "count": 1, "percent": 50.0}, {"answerValue": "sections2={'sec21742822028911': {'1': [0]}}", "count": 1, "percent": 50.0}], "typedValues": [], "averageValue": null}, {"questionId": "q_1742821425361", "questionType": "q507", "title": "Согласны ли вы с утверждениями?", "chartType": "bar", "answersDetail": [{"answerValue": "Таблица: {\"r0\": [\"yes\"], \"r1\": [\"no\"]}", "count": 2, "percent": 100.0}], "typedValues": [], "averageValue": null}]};
+
+            // Когда загрузится DOM – строим графики
+            window.addEventListener("DOMContentLoaded", function() {
+
+                // 1) Общая статистика: столбчатая диаграмма (всегда)
+                const c1 = document.getElementById("overallChart").getContext("2d");
+                new Chart(c1, {
+                  type: 'bar',
+                  data: {
+                    labels: ['Приглашены','Пройдено','Отложено','В процессе'],
+                    datasets: [{
+                      label: 'Респонденты',
+                      data: [
+                        analyticsData.invited_count,
+                        analyticsData.completed_count,
+                        analyticsData.postponed_count,
+                        analyticsData.in_progress_count
+                      ],
+                      backgroundColor: 'rgba(75,192,192,0.4)',
+                      borderColor: 'rgba(75,192,192,1)',
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    scales: {
+                      y: { beginAtZero: true }
+                    }
+                  }
+                });
+
+                // 2) Генерируем по одному графику для каждого вопроса
+                const questionsBlock = document.getElementById("questionsBlock");
+
+                analyticsData.question_analytics.forEach((q, qIndex) => {
+                    // Создаём отдельный блок
+                    const qDiv = document.createElement("div");
+                    qDiv.className = "question-block";
+
+                    // Выводим заголовок, ID, тип вопроса
+                    qDiv.innerHTML = `
+                      <h2>Вопрос #${qIndex+1}: ${q.title}</h2>
+                      <p><b>ID:</b> ${q.questionId}, <b>Тип:</b> ${q.questionType}</p>
+                    `;
+
+                    // Под вопросом – выводим таблицу статистики (ответ / count / percent)
+                    let tableHtml = `
+                      <table class="answer-stats">
+                        <thead>
+                          <tr>
+                            <th>Ответ</th>
+                            <th>Кол-во</th>
+                            <th>%</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                    `;
+                    q.answersDetail.forEach((ans) => {
+                      tableHtml += `
+                        <tr>
+                          <td>${ans.answerValue}</td>
+                          <td>${ans.count}</td>
+                          <td>${ans.percent}</td>
+                        </tr>
+                      `;
+                    });
+                    tableHtml += "</tbody></table>";
+
+                    // Вставляем таблицу в блок
+                    const statsTableDiv = document.createElement("div");
+                    statsTableDiv.innerHTML = tableHtml;
+                    qDiv.appendChild(statsTableDiv);
+
+                    // Готовим данные для диаграммы
+                    const qLabels = q.answersDetail.map(a => a.answerValue);
+                    const qValues = q.answersDetail.map(a => a.count);
+
+                    // Определяем подходящий тип диаграммы
+                    // (серверной логики нет, но мы можем в JS при желании)
+                    function chooseChartType(qType) {
+                      // Здесь продублируем логику или упростим
+                      // (в реальном проекте можно передавать chartType сразу из питона)
+                      const singleChoice = ["q101","q103","q201"];
+                      const multipleChoice = ["q102","q202"];
+                      const stars = ["q405"];
+                      const matrixes = ["q501","q502","q503","q504","q505","q506","q507"];
+                      const scales = ["q401","q402","q403","q404"];
+
+                      if (singleChoice.includes(qType)) return "pie";
+                      if (multipleChoice.includes(qType)) return "bar";
+                      if (stars.includes(qType)) return "bar";
+                      if (matrixes.includes(qType)) return "bar";
+                      if (scales.includes(qType)) return "bar";
+                      return "bar";
+                    }
+                    const optimalType = chooseChartType(q.questionType);
+
+                    // Создаём canvas и рисуем одну диаграмму
+                    const container = document.createElement("div");
+                    container.className = "chart-container";
+                    const canvasId = `question_${qIndex}_chart`;
+                    container.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+                    qDiv.appendChild(container);
+
+                    setTimeout(() => {
+                      const ctx = document.getElementById(canvasId).getContext("2d");
+                      new Chart(ctx, {
+                        type: optimalType,
+                        data: {
+                          labels: qLabels,
+                          datasets: [{
+                            label: "Ответы",
+                            data: qValues,
+                            backgroundColor: "rgba(153,102,255,0.6)",
+                            borderColor: "rgba(153,102,255,1)",
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          responsive: true,
+                          plugins: {
+                            title: {
+                              display: true,
+                              text: `Тип диаграммы: ${optimalType.toUpperCase()}`
+                            }
+                          },
+                          scales: (optimalType === 'pie') ? {}
+                                 : { y: { beginAtZero: true } },
+                        }
+                      });
+                    }, 0);
+
+                    // Добавляем блок вопроса в общий контейнер
+                    questionsBlock.appendChild(qDiv);
+                });
+            });
+          </script>
+        </body>
+        </html>
+        
