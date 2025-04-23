@@ -19,7 +19,7 @@ import sqlcipher3 as sqlite3
 from functools import wraps
 from threading import Lock
 from typing import Union
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from flask import Flask, request, jsonify, g, send_file, Response
 from flask_cors import CORS
 from flask_limiter import Limiter
@@ -66,6 +66,7 @@ limiter = Limiter(
 )
 
 BASE_CLIENT_SURVEY = os.getenv("BASE_CLIENT_SURVEY")
+SECRET_KEY  = os.getenv("SECRET_KEY")
 DB_NAME = os.getenv("DB_NAME")
 DB_KEY = os.getenv("DB_ENCRYPTION_KEY")
 BASE_ADMIN_SURVEY = os.getenv("BASE_ADMIN_SURVEY")
@@ -139,8 +140,14 @@ def verify_password(plain_password: str, hashed_password: Union[str, bytes]) -> 
 
 
 
-def generate_token():
-    return secrets.token_hex(32)
+def generate_token(user_id):
+    payload = {
+        "user_id": user_id,
+        "exp": datetime.now(timezone.utc) + timedelta(days=TOKEN_EXPIRY_DAYS),
+        "iat": datetime.now(timezone.utc)
+    }
+    token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+    return token
 
 def save_token(user_id, token):
     if token.startswith("Bearer "):
@@ -174,11 +181,17 @@ def delete_token(user_id):
     conn.close()
     print(f"Токен для користувача {user_id} видалено.")
 
-def is_token_valid(created_at):
-    created_date = datetime.strptime(created_at, "%Y-%m-%d %H:%M:%S")
-    expiry_date = created_date + timedelta(days=TOKEN_EXPIRY_DAYS)
-    print(f"Токен створений: {created_date}, закінчується: {expiry_date}, зараз: {datetime.now()}")
-    return datetime.now() < expiry_date
+def is_token_valid(token):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        print(f"Токен валідний, payload: {payload}")
+        return True, payload["user_id"]
+    except jwt.ExpiredSignatureError:
+        print("Токен протерміновано.")
+        return False, None
+    except jwt.InvalidTokenError:
+        print("Недійсний токен.")
+        return False, None
 
 @app.before_request
 def authorize():
@@ -213,7 +226,7 @@ def authorize():
             return jsonify({"success": False, "message": "Неправильний токен."}), 401
 
         user_id, created_at = token_info
-        if not is_token_valid(created_at):
+        if not is_token_valid(token):
             delete_token(user_id)
             return jsonify({"success": False, "message": "Термін дії токена минув."}), 401
 
@@ -532,7 +545,7 @@ def google_auth():
 
         cursor.execute("DELETE FROM tokens WHERE user_id = ?", (user_id,))
         conn.commit()
-        token = generate_token()
+        token = generate_token(user_id)
         save_token(user_id, token)
 
         conn.close()
@@ -755,7 +768,7 @@ def register():
             client_survey_folder = os.path.join(BASE_CLIENT_SURVEY, str(new_global_id))
             os.makedirs(client_survey_folder, exist_ok=True)
 
-            token = generate_token()
+            token = generate_token(new_global_id)
             save_token(new_global_id, token)
             log_event("registration_user", new_global_id, None, f"Реєстрація нового клієнта (id={new_global_id})")
 
@@ -807,7 +820,7 @@ def register():
             admin_survey_folder = os.path.join(BASE_ADMIN_SURVEY, str(new_global_id))
             os.makedirs(admin_survey_folder, exist_ok=True)
 
-            token = generate_token()
+            token = generate_token(new_global_id)
             save_token(new_global_id, token)
             log_event("registration_user", new_global_id, None, f"Реєстрація адміністратора (id={new_global_id})")
 
@@ -892,7 +905,7 @@ def register():
                 """, (new_path, new_global_id))
                 conn.commit()
 
-            token = generate_token()
+            token = generate_token(new_global_id)
             save_token(new_global_id, token)
             log_event("registration_org", new_global_id, None, f"Реєстрація організації (id={new_global_id})")
 
@@ -997,7 +1010,7 @@ def api_login():
                 })
 
         update_login_attempts(table, user_id, 0)
-        token = generate_token()
+        token = generate_token(user_id)
         save_token(user_id, token)
 
         user = {
@@ -1146,7 +1159,7 @@ def logout():
 
     user_id, created_at = token_info
 
-    if not is_token_valid(created_at):
+    if not is_token_valid(token):
         print("Токен минув, видаляємо його.")
         delete_token(user_id)
         return jsonify({"success": False, "message": "Термін дії токена минув."}), 401
@@ -6134,31 +6147,4 @@ def fetch_suspilne_news(max_pages=10):
 if __name__ == '__main__':
     create_tables()
     create_global_view_with_all_fields()
-
-    # # 👇 ОНОВЛЕННЯ ПАРОЛЯ ДЛЯ admin@gmail.com
-    # from datetime import datetime
-    # conn = get_db_connection()
-    # cursor = conn.cursor()
-
-    # try:
-    #     # Перевіримо, чи є адмін
-    #     cursor.execute("SELECT id FROM admins WHERE email = 'admin@gmail.com'")
-    #     admin = cursor.fetchone()
-    #     if admin:
-    #         new_password_hash = hash_password("admin")  # або інший пароль
-    #         cursor.execute("""
-    #             UPDATE admins
-    #             SET password = ?
-    #             WHERE email = ?
-    #         """, (new_password_hash, "admin@gmail.com"))
-    #         conn.commit()
-    #         print(f"[{datetime.now()}] 🔐 Пароль для admin@gmail.com оновлено успішно.")
-    #     else:
-    #         print(f"[{datetime.now()}] ⚠️ Адміна з email admin@gmail.com не знайдено.")
-    # except Exception as e:
-    #     print(f"[{datetime.now()}] ❌ Помилка при оновленні пароля: {e}")
-    # finally:
-    #     conn.close()
-
-    # Запускаємо Flask
     app.run(debug=True, port=5000)
