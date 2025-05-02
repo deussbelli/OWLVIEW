@@ -2,7 +2,7 @@
 Secure platform for social surveys: integration of encryption and access control technologies to ensure data privacy
 A full-featured web application for secure and flexible survey creation, response tracking, and user management, built using **Flask (Python)** for backend and **React + Vite** for frontend.
 
-This is a **course project** created by **Nachynka Anastasiia**, a 3rd-year student at the **Faculty of Applied Mathematics and Informatics**, majoring in **Cybersecurity**, at **Ivan Franko National University of Lviv**.
+This is a **course project** created by **Anastasiia Nachynka**, a 3rd-year student at the **Faculty of Applied Mathematics and Informatics**, majoring in **Cybersecurity**, at **Ivan Franko National University of Lviv**.
 
 ---
 
@@ -125,6 +125,6 @@ SMTP_PASSWORD=your-password
 ---
 
 ### 📄 License
-This project is for educational purposes and was created as a course project by **Nachynka Anastasiia**.
+This project is for educational purposes and was created as a course project by **Anastasiia Nachynka**.
 **All rights reserved © 2025.**
 
