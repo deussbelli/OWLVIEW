@@ -122,6 +122,7 @@ TOKEN_EXPIRY_DAYS=3
 SMTP_EMAIL=your@email.com
 SMTP_PASSWORD=your-password
 ```
+---
 
 ### 📄 License
 This project is for educational purposes and was created as a course project by **Nachynka Anastasiia**.
