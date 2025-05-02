@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Login.module.css";
 import apiClient from "../utils/axiosConfig";
 import { GoogleLogin } from "@react-oauth/google";
+import GoogleLogo from '../assets/icons8-google.svg';
 
 const Login = ({ onLoginSuccess }) => {
   const navigate = useNavigate();
@@ -110,6 +111,39 @@ const Login = ({ onLoginSuccess }) => {
     alert("Google Login Failed!");
   };
 
+  const GoogleLoginButton = () => {
+    const googleRef = useRef();
+    const [iconError, setIconError] = useState(false);
+  
+    return (
+      <div style={{ position: 'relative' }}>
+        <button
+          onClick={() => googleRef.current.click()}
+          className={styles.googleButton}
+        >
+          <span className={`${styles.googleIconContainer} ${iconError ? styles.fallback : ''}`}>
+            <img 
+              src={GoogleLogo} 
+              alt="Google logo" 
+              className={styles.googleIcon}
+              onError={() => setIconError(true)}
+            />
+          </span>
+          Вхід через Google
+        </button>
+        
+        <div style={{ opacity: 0, position: 'absolute', left: 0, top: 0 }}>
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            useOneTap={false}
+            ref={googleRef}
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={styles.container}>
       <h1>Авторизація</h1>
@@ -154,20 +188,7 @@ const Login = ({ onLoginSuccess }) => {
         </button>
       </form>
       <div style={{ marginTop: "20px" }}>
-        <GoogleLogin
-          onSuccess={handleGoogleSuccess}
-          onError={handleGoogleError}
-          useOneTap={false}
-          render={({ onClick, disabled }) => (
-            <button
-              onClick={onClick}
-              disabled={disabled}
-              className={styles.googleButton}
-            >
-              Вхід через Google
-            </button>
-          )}
-        />
+        <GoogleLoginButton />
       </div>
       <div style={{ marginTop: "20px" }}>
         <a href="/registration">У мене немає акаунту</a>

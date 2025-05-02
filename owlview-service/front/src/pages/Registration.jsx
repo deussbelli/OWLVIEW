@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Registration.module.css";
 import apiClient from "../utils/axiosConfig";
 import { GoogleLogin } from "@react-oauth/google";
 import { useGoogleLogin } from "@react-oauth/google";
+import GoogleLogo from '../assets/icons8-google.svg';
 
 import {
   countries,
@@ -303,6 +304,39 @@ const Registration = ({ onRegisterSuccess }) => {
   const handleGoogleError = () => {
     console.error("Google Login Failed");
     alert("Google Login Failed!");
+  };
+
+  const GoogleLoginButton = () => {
+    const googleRef = useRef();
+    const [iconError, setIconError] = useState(false);
+  
+    return (
+      <div style={{ position: 'relative' }}>
+        <button
+          onClick={() => googleRef.current.click()}
+          className={styles.googleButton}
+        >
+          <span className={`${styles.googleIconContainer} ${iconError ? styles.fallback : ''}`}>
+            <img 
+              src={GoogleLogo} 
+              alt="Google logo" 
+              className={styles.googleIcon}
+              onError={() => setIconError(true)}
+            />
+          </span>
+          Вхід через Google
+        </button>
+        
+        <div style={{ opacity: 0, position: 'absolute', left: 0, top: 0 }}>
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            useOneTap={false}
+            ref={googleRef}
+          />
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -974,7 +1008,7 @@ const Registration = ({ onRegisterSuccess }) => {
 
       {activeTab === "client" && (
         <div style={{ marginTop: "20px" }}>
-          <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />
+          <GoogleLoginButton />
         </div>
       )}
 

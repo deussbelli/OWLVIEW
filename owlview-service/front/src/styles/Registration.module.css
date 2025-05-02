@@ -499,3 +499,66 @@ input:focus, select:focus {
 .iconMarginRight {
 	margin-right: 0.8rem;
 }
+
+
+.googleButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #fff;
+	color: #3c4043;
+	border: 1px solid #dadce0;
+	border-radius: 8px;
+	padding: 12px 24px;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	width: 100%;
+	max-width: 300px;
+	margin: 20px auto 0;
+	transition: all 0.3s ease;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	position: relative;
+	overflow: hidden;
+  }
+  
+  .googleButton:hover {
+	background-color: #f8f9fa;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+  
+  .googleButton:active {
+	background-color: #f1f3f4;
+  }
+  
+  .googleIconContainer {
+	width: 20px;
+	height: 20px;
+	margin-right: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+  }
+  
+  .googleIcon {
+	width: 24px;
+	height: 24px;
+  }
+  
+  .googleIconContainer::before {
+	content: "G";
+	position: absolute;
+	font-weight: bold;
+	font-size: 16px;
+	color: #4285F4;
+	display: none;
+  }
+  
+  .googleIconContainer.fallback::before {
+	display: block;
+  }
+  
+  .googleIconContainer.fallback .googleIcon {
+	display: none;
+  }
